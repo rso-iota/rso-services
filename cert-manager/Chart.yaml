@@ -1,0 +1,7 @@
+apiVersion: v2
+name: rso-cert-manager
+version: "1.0.1"
+dependencies:
+  - name: cert-manager
+    version: 1.16.2
+    repository: https://charts.jetstack.io

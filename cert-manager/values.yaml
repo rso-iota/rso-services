@@ -1,0 +1,10 @@
+cert-manager:
+  installCRDs: false
+  extraArgs:
+    - --dns01-recursive-nameservers-only
+    - --dns01-recursive-nameservers=kube-dns.kube-system.svc.cluster.local:53
+
+  prometheus:
+    enabled: true
+    servicemonitor:
+      enabled: true

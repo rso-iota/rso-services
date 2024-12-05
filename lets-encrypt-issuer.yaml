@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-issuer
+  # No NS, so it is a cluster-wide resource
+spec:
+  acme:
+    email:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-issuer-account-key
+    solvers:
+      - selector: {}
+        dns01:
+          digitalocean:
+            tokenSecretRef:
+              name: lets-encrypt-do-dns
+              key: access-token
+
