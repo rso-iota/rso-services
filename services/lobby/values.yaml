@@ -1,0 +1,8 @@
+replicaCount: 1
+
+dbName: "lobby"
+dbUser: "lobby-user"
+dbPassword: "lobby-password"
+dbServiceName: "lobby-db-service"
+
+lobbyInternalPort: 8080

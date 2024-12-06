@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: lobby-service
+  name: lobby-app-service
+spec:
+  ports:
+    - name: 80-{{ .Values.lobbyInternalPort }}
+      port: 80
+      protocol: TCP
+      targetPort: {{ .Values.lobbyInternalPort }}
+  selector:
+    app: lobby-app
+  type: ClusterIP
