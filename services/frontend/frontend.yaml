@@ -44,7 +44,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-issuer
 spec:
   rules:
-    - host: rso.janvasiljevic.com
+    - host: rso-2.janvasiljevic.com
       http:
         paths:
           - path: /
@@ -55,6 +55,5 @@ spec:
                 port:
                   number: 80
   tls:
-    - secretName: rso-cert
-      hosts:
+    - hosts:
         - rso.janvasiljevic.com

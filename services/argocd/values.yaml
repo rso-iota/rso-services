@@ -14,7 +14,7 @@ argo-cd:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
       extraRules:
-        - host: rso.janvasiljevic.com
+        - host: rso-2.janvasiljevic.com
           http:
             paths:
               - path: /argocd
@@ -24,4 +24,7 @@ argo-cd:
                     name: argocd-server
                     port:
                       name: http
+      tls:
+        - hosts:
+            - rso-2.janvasiljevic.com
 
