@@ -1,13 +1,3 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: rso-frontend-image-updater
-  namespace: argocd
-  annotations:
-    argocd-image-updater.argoproj.io/write-back-method: argocd
-    argocd-image-updater.argoproj.io/image-list: api=ghcr.io/rso-iota/rso-fe
-    argocd-image-updater.argoproj.io/update-strategy: digest
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
