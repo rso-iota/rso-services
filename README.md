@@ -21,8 +21,9 @@ Create a k8s secret `lets-encrypt-do-dns` in the `cert-manager` namespace with t
 Update helm deps:
 
 ```shell
-helm dep up ./cert-manager
-helm dep up ./traefik
+helm dep up ./services/cert-manager
+helm dep up ./services/traefik
+helm dep up ./services/argocd
 ```
 
 Update your email in `./lets-encrypt-issuer.yaml` and then:
@@ -34,8 +35,9 @@ k apply  -f ./lets-encrypt-issuer.yaml
 Install helm charts from the folders:
 
 ```shell
-helm install --create-namespace --namespace=cert-manager cert-manager ./cert-manager
-helm install --create-namespace --namespace=traefik traefik ./traefik
+helm install --create-namespace --namespace=cert-manager cert-manager ./services/cert-manager
+helm install --create-namespace --namespace=traefik traefik ./services/traefik
+helm install --create-namespace --namespace=argocd argocd ./services/argocd
 ```
 
 Wait for the `traefik` pod ta setup DO LB:

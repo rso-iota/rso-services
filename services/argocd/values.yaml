@@ -1,0 +1,27 @@
+argo-cd:
+  configs:
+    params:
+      server.rootpath: /argocd
+      # set insecure, because we are terminating TLS on Traefik
+      server.insecure: true
+
+      # kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
+  server:
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      extraRules:
+        - host: rso.janvasiljevic.com
+          http:
+            paths:
+              - path: /argocd
+                pathType: Prefix
+                backend:
+                  service:
+                    name: argocd-server
+                    port:
+                      name: http
+
