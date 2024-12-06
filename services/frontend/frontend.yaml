@@ -56,4 +56,4 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - rso.janvasiljevic.com
+        - rso-2.janvasiljevic.com
