@@ -15,9 +15,9 @@ spec:
     spec:
       containers:
         - name: rso-front-container
-          image: ghcr.io/rso-iota/rso-fe:latest
+          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
           ports:
-            - containerPort: 80
+            - containerPort: {{ .Values.appPort }}
 ---
 apiVersion: v1
 kind: Service
@@ -30,7 +30,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: {{ .Values.appPort }}
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -44,7 +44,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-issuer
 spec:
   rules:
-    - host: rso-2.janvasiljevic.com
+    - host: {{ .Values.dns }}
       http:
         paths:
           - path: /
@@ -56,4 +56,4 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - rso-2.janvasiljevic.com
+        - {{ .Values.dns }}

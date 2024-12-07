@@ -1,0 +1,6 @@
+image:
+  name: ghcr.io/rso-iota/rso-fe
+  tag: latest
+
+dns: rso-2.janvasiljevic.com
+appPort: 80

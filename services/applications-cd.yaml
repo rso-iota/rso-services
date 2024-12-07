@@ -5,14 +5,18 @@ metadata:
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/write-back-method: argocd
-    argocd-image-updater.argoproj.io/image-list: api=ghcr.io/rso-iota/rso-fe
-    argocd-image-updater.argoproj.io/update-strategy: digest
+    argocd-image-updater.argoproj.io/image-list: api=ghcr.io/rso-iota/rso-fe:latest
+    argocd-image-updater.argoproj.io/update-strategy: newest-build
 spec:
   project: default
+  syncPolicy:
+    automated:
+      selfHeal: true
   source:
     repoURL: https://github.com/rso-iota/rso-services.git
     targetRevision: HEAD
     path: services/frontend
+
   destination:
     server: https://kubernetes.default.svc
     namespace: apps
@@ -24,10 +28,13 @@ metadata:
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/write-back-method: argocd
-    argocd-image-updater.argoproj.io/image-list: api=ghcr.io/rso-iota/rso-lobby
-    argocd-image-updater.argoproj.io/update-strategy: digest
+    argocd-image-updater.argoproj.io/image-list: api=ghcr.io/rso-iota/rso-lobby:latest
+    argocd-image-updater.argoproj.io/update-strategy: newest-build
 spec:
   project: default
+  syncPolicy:
+    automated:
+      selfHeal: true
   source:
     repoURL: https://github.com/rso-iota/rso-services.git
     targetRevision: HEAD
