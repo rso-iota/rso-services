@@ -6,10 +6,10 @@ metadata:
   name: lobby-app-service
 spec:
   ports:
-    - name: 80-{{ .Values.lobbyInternalPort }}
+    - name: 80-{{ .Values.lobby.internalPort }}
       port: 80
       protocol: TCP
-      targetPort: {{ .Values.lobbyInternalPort }}
+      targetPort: {{ .Values.lobby.internalPort }}
   selector:
     app: lobby-app
   type: ClusterIP

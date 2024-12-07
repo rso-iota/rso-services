@@ -46,11 +46,11 @@ spec:
             - containerPort: 5432
           env:
             - name: POSTGRES_DB
-              value: {{ .Values.dbName }}
+              value: {{ .Values.db.name }}
             - name: POSTGRES_USER
-              value: {{ .Values.dbUser }}
+              value: {{ .Values.db.user }}
             - name: POSTGRES_PASSWORD
-              value: {{ .Values.dbPassword }}
+              value: {{ .Values.db.password }}
               # set the path to the postgres data directory
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
@@ -66,7 +66,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.dbServiceName }}
+  name: {{ .Values.db.service }}
 spec:
   selector:
     app: lobby-postgres

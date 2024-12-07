@@ -1,8 +1,13 @@
-replicaCount: 1
+db:
+  name: "lobby"
+  user: "lobby-user"
+  password: "lobby-password"
+  service: "lobby-db-service"
 
-dbName: "lobby"
-dbUser: "lobby-user"
-dbPassword: "lobby-password"
-dbServiceName: "lobby-db-service"
+lobby:
+  replicaCount: 1
+  internalPort: 8080
 
-lobbyInternalPort: 8080
+image:
+  name: "ghcr.io/rso-iota/rso-lobby"
+  tag: "latest"

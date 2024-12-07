@@ -5,7 +5,7 @@ metadata:
     app: lobby-app
   name: lobby-app-deployment
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.lobby.replicaCount }}
   selector:
     matchLabels:
       app: lobby-app
@@ -20,23 +20,23 @@ spec:
         app: lobby-app
     spec:
       containers:
-        - image: ghcr.io/rso-iota/rso-lobby:latest
+        - image: {{ .Values.image.name}}:{{ .Values.image.tag }}
           imagePullPolicy: Always
           name: lobby-app
           resources: { }
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://{{.Values.dbServiceName}}:5432/{{ .Values.dbName }}
+              value: jdbc:postgresql://{{.Values.db.service}}:5432/{{ .Values.db.name }}
             - name: SPRING_DATASOURCE_USERNAME
-              value: {{ .Values.dbUser }}
+              value: {{ .Values.db.user }}
             - name: SPRING_DATASOURCE_PASSWORD
-              value: {{ .Values.dbPassword }}
+              value: {{ .Values.db.password }}
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
-              port: {{ .Values.lobbyInternalPort }}
+              port: {{ .Values.lobby.internalPort }}
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
-              port: {{ .Values.lobbyInternalPort }}
+              port: {{ .Values.lobby.internalPort }}
 
