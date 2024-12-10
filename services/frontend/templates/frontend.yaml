@@ -4,6 +4,7 @@ metadata:
   name: rso-frontend-deployment
   namespace: apps
 spec:
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: rso-frontend
