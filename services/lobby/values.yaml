@@ -11,3 +11,7 @@ lobby:
 image:
   name: "ghcr.io/rso-iota/rso-lobby"
   tag: "latest"
+
+
+
+dns: rso-2.janvasiljevic.com

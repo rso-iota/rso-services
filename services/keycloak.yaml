@@ -1,3 +1,4 @@
+# Todo: put this into a helm chart
 apiVersion: v1
 kind: Namespace
 metadata:
