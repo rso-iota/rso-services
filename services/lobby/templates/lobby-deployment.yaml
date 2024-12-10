@@ -25,6 +25,9 @@ spec:
           name: lobby-app
           resources: { }
           env:
+            # set context path
+            - name: SERVER_SERVLET_CONTEXT_PATH
+              value: /backend
             - name: SPRING_DATASOURCE_URL
               value: jdbc:postgresql://{{.Values.db.service}}:5432/{{ .Values.db.name }}
             - name: SPRING_DATASOURCE_USERNAME
