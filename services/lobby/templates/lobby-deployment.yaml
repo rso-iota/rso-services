@@ -6,6 +6,7 @@ metadata:
   name: lobby-app-deployment
 spec:
   replicas: {{ .Values.lobby.replicaCount }}
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: lobby-app
