@@ -13,5 +13,7 @@ image:
   tag: "latest"
 
 
+config:
+  contextPath: "/backend"
 
 dns: rso-2.janvasiljevic.com

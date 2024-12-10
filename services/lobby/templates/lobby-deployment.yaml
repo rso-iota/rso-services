@@ -27,7 +27,7 @@ spec:
           env:
             # set context path
             - name: SERVER_SERVLET_CONTEXT_PATH
-              value: /backend
+              value: {{ .Values.config.contextPath }}
             - name: SPRING_DATASOURCE_URL
               value: jdbc:postgresql://{{.Values.db.service}}:5432/{{ .Values.db.name }}
             - name: SPRING_DATASOURCE_USERNAME
@@ -38,10 +38,10 @@ spec:
             - containerPort: {{ .Values.lobby.internalPort }}
           livenessProbe:
             httpGet:
-              path: /actuator/health/liveness
+              path: {{.Values.config.contextPath }}/actuator/health/liveness
               port: {{ .Values.lobby.internalPort }}
           readinessProbe:
             httpGet:
-              path: /actuator/health/readiness
+              path: {{.Values.config.contextPath }}/actuator/health/readiness
               port: {{ .Values.lobby.internalPort }}
 
