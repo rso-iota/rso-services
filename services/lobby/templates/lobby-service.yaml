@@ -1,9 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app: lobby-service
-  name: lobby-app-service
+  name: lobby-svc
+  namespace: apps
 spec:
   ports:
     - name: 80-{{ .Values.lobby.internalPort }}
