@@ -24,6 +24,7 @@ Update helm deps:
 helm dep up ./services/cert-manager
 helm dep up ./services/traefik
 helm dep up ./services/argocd
+helm dep up ./services/kong
 ```
 
 Update your email in `./lets-encrypt-issuer.yaml` and then:
