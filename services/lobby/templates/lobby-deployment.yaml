@@ -34,6 +34,8 @@ spec:
               value: {{ .Values.db.user }}
             - name: SPRING_DATASOURCE_PASSWORD
               value: {{ .Values.db.password }}
+          ports:
+            - containerPort: {{ .Values.lobby.internalPort }}
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
