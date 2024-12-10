@@ -19,7 +19,7 @@ spec:
             - name: VITE_BACKEND_API
               value: {{ .Values.env.backendApi }}
             - name: VITE_KC_AUTHORITY
-              value: {{ .Values.env.keycloakClientId }}
+              value: {{ .Values.env.keycloakAuthority }}
             - name: VITE_KC_CLIENT_ID
               value: {{ .Values.env.keycloakClientId }}
           image: {{ .Values.image.name }}:{{ .Values.image.tag }}
