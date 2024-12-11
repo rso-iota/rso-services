@@ -16,19 +16,23 @@ kong:
     enabled: true
 
     ingress:
-
       enabled: true
       annotations:
         kubernetes.io/ingress.class: traefik
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
-      hosts:
-        - host: rso-2.janvasiljevic.com
-          paths:
-            - path: /api
-              pathType: Prefix
-              backend:
-                service:
-                  name: kong-proxy
-                  port:
-                    number: 80
+
+      hostname: rso-2.janvasiljevic.com
+      path: /api
+      pathType: Prefix
+
+#      hosts:
+#        - host: rso-2.janvasiljevic.com
+#          paths:
+#            - path: /api
+#              pathType: Prefix
+#              backend:
+#                service:
+#                  name: kong-proxy
+#                  port:
+#                    number: 80

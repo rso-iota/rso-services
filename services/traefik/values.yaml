@@ -1,4 +1,8 @@
 traefik:
+  ingressClass:
+    name: traefik
+    enabled: true
+    isDefaultClass: true
   logs:
     general:
       noColor: true
