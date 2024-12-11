@@ -1,30 +1,31 @@
-env:
-  database: "off"  # DB-less mode
+kong:
+  env:
+    database: "off"  # DB-less mode
 
-ingressController:
-  enabled: true
-  ingressClass: kong  # Required for k8s Ingress manifests
-
-proxy:
-  type: ClusterIP
-  http:
+  ingressController:
     enabled: true
-  tls:
-    enabled: false
+    ingressClass: kong  # Required for k8s Ingress manifests
 
-  ingress:
-    enabled: true
-    annotations:
-      kubernetes.io/ingress.class: traefik
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      traefik.ingress.kubernetes.io/router.tls: "true"
-    hosts:
-      - host: rso-2.janvasiljevic.com
-        paths:
-          - path: /api
-            pathType: Prefix
-            backend:
-              service:
-                name: kong-proxy
-                port:
-                  number: 80
+  proxy:
+    type: ClusterIP
+    http:
+      enabled: true
+    tls:
+      enabled: false
+
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: traefik
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - host: rso-2.janvasiljevic.com
+          paths:
+            - path: /api
+              pathType: Prefix
+              backend:
+                service:
+                  name: kong-proxy
+                  port:
+                    number: 80
