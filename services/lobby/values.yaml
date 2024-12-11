@@ -14,6 +14,6 @@ image:
 
 
 config:
-  contextPath: "/backend"
+  contextPath: "/api/backend"
 
 dns: rso-2.janvasiljevic.com
