@@ -11,6 +11,7 @@ kong:
     enabled: true
 
   manager:
+    type: ClusterIP
     enabled: true
     http:
       enabled: true
