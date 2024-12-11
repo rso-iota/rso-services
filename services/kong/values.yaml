@@ -24,14 +24,6 @@ kong:
         traefik.ingress.kubernetes.io/router.tls: "true"
       hosts:
         - host: rso-2.janvasiljevic.com
-          http:
-            paths:
-              - path: /api
-                pathType: Prefix
-                backend:
-                  service:
-                    name: kong-proxy
-                    port:
-                      number: 80
-
+          paths:
+            - /api
 

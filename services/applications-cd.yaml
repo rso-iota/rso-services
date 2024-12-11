@@ -76,7 +76,10 @@ spec:
   source:
     repoURL: https://github.com/rso-iota/rso-services.git
     targetRevision: HEAD
-    path: services/game
+    path: services/kong
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
   destination:
     server: https://kubernetes.default.svc
     namespace: kong
