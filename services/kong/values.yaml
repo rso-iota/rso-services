@@ -11,7 +11,7 @@ kong:
     ingressClass: kong  # Required for k8s Ingress manifests
 
   extraObjects:
-      apiVersion: traefik.io/v1alpha1
+    - apiVersion: traefik.io/v1alpha1
       kind: Middleware
       metadata:
         name: strip-kong-manager-api
@@ -33,7 +33,7 @@ kong:
         annotations:
             kubernetes.io/ingress.class: traefik
             traefik.ingress.kubernetes.io/router.entrypoints: websecure
-            traefik.ingress.kubernetes.io/router.tls: "true"A
+            traefik.ingress.kubernetes.io/router.tls: "true"
             traefik.ingress.kubernetes.io/router.middlewares: kong-strip-kong-manager-api@kubernetescrd
         hostname: rso-2.janvasiljevic.com
         pathType: Prefix
