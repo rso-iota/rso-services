@@ -7,8 +7,6 @@ kong:
     enabled: true
     ingressClass: kong  # Required for k8s Ingress manifests
 
-  admin:
-    enabled: true
 
   manager:
     type: ClusterIP
