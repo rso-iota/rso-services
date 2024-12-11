@@ -1,7 +1,8 @@
 kong:
   env:
     database: "off"  # DB-less mode
-    admin_gui_url: "https://rso-2.janvasiljevic.com/api/kong"
+    admin_gui_path: '/kong-manager'
+    admin_gui_url: "https://rso-2.janvasiljevic.com/kong-manager"
 
   ingressController:
     enabled: true
@@ -23,7 +24,7 @@ kong:
         traefik.ingress.kubernetes.io/router.tls: "true"
       hostname: rso-2.janvasiljevic.com
       pathType: Prefix
-      path: /api/kong
+      path: /kong-manager
 
   proxy:
     type: ClusterIP
