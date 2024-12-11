@@ -2,6 +2,7 @@ kong:
   env:
     database: "off"  # DB-less mode
     admin_gui_url: https://rso-2.janvasiljevic.com/api/kong
+    admin_gui_api_url: https://rso-2.janvasiljevic.com/api/kong
 
   ingressController:
     enabled: true
