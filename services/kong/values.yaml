@@ -1,13 +1,29 @@
 kong:
   env:
     database: "off"  # DB-less mode
-    admin_gui_path: '/kong-manager'
+    admin_gui_path: "/kong-manager"
     admin_gui_url: "https://rso-2.janvasiljevic.com/kong-manager"
+    admin_gui_api_url: "https://rso-2.janvasiljevic.com/kong-manager-api"
 
   ingressController:
     enabled: true
     ingressClass: kong  # Required for k8s Ingress manifests
 
+  admin:
+    type: ClusterIP
+    http:
+      enabled: true
+    tls:
+      enabled: false
+    ingress:
+        enabled: true
+        annotations:
+            kubernetes.io/ingress.class: traefik
+            traefik.ingress.kubernetes.io/router.entrypoints: websecure
+            traefik.ingress.kubernetes.io/router.tls: "true"
+        hostname: rso-2.janvasiljevic.com
+        pathType: Prefix
+        path: /kong-manager-api
 
   manager:
     type: ClusterIP
