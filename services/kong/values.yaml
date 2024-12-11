@@ -22,4 +22,10 @@ proxy:
     hosts:
       - host: rso-2.janvasiljevic.com
         paths:
-          - /api
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: kong-proxy
+                port:
+                  number: 8080
