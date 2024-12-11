@@ -8,10 +8,30 @@ kong:
   ingressController:
     enabled: true
     ingressClass: kong
-  # There's an HTTP2 bug in Kong which creates
-  # an excess of noise in the proxy logs.
-  # The fix will be in Kong 2.8.2
-  # https://github.com/Kong/kong/pull/8690
-  admin:
+
+  proxy:
+    type: ClusterIP
+    http:
+      enabled: true
+      servicePort: 8080
     tls:
-      parameters: []
+      enabled: false
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: "traefik"
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - host: rso-2.janvasiljevic.com
+          http:
+            paths:
+              - path: /api
+                pathType: Prefix
+                backend:
+                  service:
+                    name: kong-proxy
+                    port:
+                      number: 80
+
+
