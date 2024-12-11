@@ -7,14 +7,13 @@ kong:
     enabled: true
     ingressClass: kong  # Required for k8s Ingress manifests
 
-
   admin:
     enabled: true
 
   manager:
     enabled: true
     http:
-      enabled: ture
+      enabled: true
     tls:
       enabled: false
     ingress:
