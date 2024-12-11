@@ -9,7 +9,6 @@ proxy:
   type: ClusterIP
   http:
     enabled: true
-    servicePort: 8080
   tls:
     enabled: false
 
@@ -28,4 +27,4 @@ proxy:
               service:
                 name: kong-proxy
                 port:
-                  number: 8080
+                  number: 80
