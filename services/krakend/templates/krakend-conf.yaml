@@ -22,9 +22,9 @@ data:
           },
           "backend": [
             {
-              "url_pattern": "/api/lobby",
+              "url_pattern": "",
               "host": [
-                "lobby-svc"
+                "http://lobby-svc:80"
               ]
             }
           ]
