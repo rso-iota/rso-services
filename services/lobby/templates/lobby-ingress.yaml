@@ -11,13 +11,10 @@ spec:
     - host: {{ .Values.dns }}
       http:
         paths:
-          - path: /api/backend
+          - path: /api/lobby
             pathType: Prefix
             backend:
               service:
                 name: lobby-svc
                 port:
                   number: 80
-  tls:
-    - hosts:
-        - {{ .Values.dns }}
