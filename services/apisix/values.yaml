@@ -1,9 +1,4 @@
 apisix:
-  service:
-    type: ClusterIP
-    http:
-      enabled: true
-
   apisix:
     deployment:
       mode: standalone
