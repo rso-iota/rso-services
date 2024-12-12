@@ -19,7 +19,7 @@ spec:
         # Restarts the pod if the config changes
         checksum/config: {{ include (print $.Template.BasePath "/krakend-conf.yaml") . | sha256sum }}
       labels:
-        app: krakend
+        app: krakend-pod
     spec:
       containers:
         - name: krakend
