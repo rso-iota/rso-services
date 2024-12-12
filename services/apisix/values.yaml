@@ -1,9 +1,9 @@
 apisix:
   apisix:
-    deployment:
-      mode: standalone
-  ingress-controller:
-    enabled: true
-
+    enable_admin: false
+  deployment:
+    role: data_plane
+    role_data_plane:
+      config_provider: yaml
   etcd:
     enabled: false
