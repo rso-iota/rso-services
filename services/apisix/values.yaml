@@ -9,3 +9,6 @@ apisix:
       mode: standalone
   ingress-controller:
     enabled: true
+
+  etcd:
+    enabled: false
