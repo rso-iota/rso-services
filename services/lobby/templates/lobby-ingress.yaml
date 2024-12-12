@@ -11,7 +11,7 @@ spec:
     - host: {{ .Values.dns }}
       http:
         paths:
-          - path: /api/lobby
+          - path: {{ .Values.config.contextPath }}
             pathType: Prefix
             backend:
               service:
