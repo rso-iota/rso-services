@@ -83,7 +83,7 @@ spec:
   source:
     repoURL: https://github.com/rso-iota/rso-services.git
     targetRevision: HEAD
-    path: services/krakend
+    path: services/game
   destination:
     server: https://kubernetes.default.svc
     namespace: apps

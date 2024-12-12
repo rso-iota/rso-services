@@ -25,7 +25,9 @@ data:
       ],
       "extra_config": {
         "telemetry/logging": {
-          "level": "DEBUG"
+          "level": "DEBUG",
+          "stdout": true,
+          "syslog": false
         }
       }
     }
