@@ -12,7 +12,7 @@ data:
       "version": 3,
       "endpoints": [
         {
-          "endpoint": "/api/lobby",
+          "endpoint": "/api/lobby/*",
           "extra_config": {
             "auth/validator": {
               "alg": "RS256",
