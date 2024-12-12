@@ -7,9 +7,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    name: krakend-pod
-    app: krakend
-    tier: app
+    app: krakend-pod
   ports:
     - protocol: TCP
       targetPort: 8080
