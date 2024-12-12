@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: krakend
+      app: krakend-pod
   replicas: 1
   revisionHistoryLimit: 2
   strategy:
