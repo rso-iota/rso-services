@@ -15,9 +15,11 @@ spec:
       maxUnavailable: 0
   template:
     metadata:
+      annotations:
+        # Restarts the pod if the config changes
+        checksum/config: {{ include (print $.Template.BasePath "/krakend-conf.yaml") . | sha256sum }}
       labels:
         app: krakend
-
     spec:
       containers:
         - name: krakend
