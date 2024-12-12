@@ -21,6 +21,8 @@ kong:
           prefixes:
             - /kong-manager-api
 
+  plugins:
+
   admin:
     enabled: true
     type: ClusterIP
