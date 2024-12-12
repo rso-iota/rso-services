@@ -34,7 +34,8 @@ data:
         "telemetry/logging": {
           "level": "DEBUG",
           "stdout": true,
-          "syslog": false
+          "syslog": false,
+          "prefix": "[THIS IS WORKING]"
         }
       }
     }
