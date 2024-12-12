@@ -3,5 +3,9 @@ apisix:
     type: ClusterIP
     http:
       enabled: true
+
+  apisix:
+    deployment:
+      mode: standalone
   ingress-controller:
     enabled: true
