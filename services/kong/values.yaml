@@ -20,6 +20,14 @@ kong:
         stripPrefix:
           prefixes:
             - /kong-manager-api
+    # Create a custom plugin - first we need a configman
+    - apiVersion: v1
+      kind: ConfigMap
+      metadata:
+          name: kong-plugin-keycloak
+          namespace: kong
+      data:
+
 
   admin:
     enabled: true
@@ -55,6 +63,8 @@ kong:
       hostname: rso-2.janvasiljevic.com
       pathType: Prefix
       path: /kong-manager
+
+
 
   proxy:
     type: ClusterIP
