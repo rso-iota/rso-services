@@ -13,6 +13,13 @@ data:
       "endpoints": [
         {
           "endpoint": "/api/lobby",
+          "extra_config": {
+            "auth/validator": {
+              "alg": "RS256",
+              "jwk_url": "http://KEYCLOAK:8080/realms/master/protocol/openid-connect/certs",
+              "disable_jwk_security": true
+            }
+          },
           "backend": [
             {
               "url_pattern": "/api/lobby",
