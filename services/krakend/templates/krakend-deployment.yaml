@@ -28,7 +28,7 @@ spec:
             - containerPort: 8080
           imagePullPolicy: IfNotPresent
           command: [ "/usr/bin/krakend" ]
-          args: [ "run", "-d", "-c", "/etc/krakend/krakend.json", "-p", "8080" ]
+          args: [ "run", "-d", "-c", "/etc/config/krakend/krakend.json", "-p", "8080" ]
           volumeMounts:
             - name: config-volume
               mountPath: /etc/config/krakend

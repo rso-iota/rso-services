@@ -20,10 +20,9 @@ data:
               "disable_jwk_security": true
             }
           },
-          dsadsa
           "backend": [
             {
-              "url_pattern": "",
+              "url_pattern": "/api/lobby",
               "host": [
                 "http://lobby-svc:80"
               ]
