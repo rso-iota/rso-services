@@ -30,8 +30,10 @@ spec:
             requests:
               memory: 128Mi
           env:
+            - name: SERVER_TOMCAT_MAX_THREADS
+              value: "20"
             - name: JAVA_OPTS
-              value: "-Xms128m -Xmx256m -XX:+UseG1GC"
+              value: "-Xms100m -Xmx256m -XX:+UseSerialGC -Xss512k -XX:MaxRAM=100m"
             - name: SERVER_SERVLET_CONTEXT_PATH
               value: {{ .Values.config.contextPath }}
           ports:
