@@ -13,6 +13,7 @@ kong:
     # Obviously not the best, but we don't have unlimited resources and it's only a demo
     minReplicas: 1
     maxReplicas: 1
+    enabled: true
 
 
   extraObjects:
