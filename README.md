@@ -39,6 +39,7 @@ Install helm charts from the folders:
 helm install --create-namespace --namespace=cert-manager cert-manager ./services/cert-manager
 helm install --create-namespace --namespace=traefik traefik ./services/traefik
 helm install --create-namespace --namespace=argocd argocd ./services/argocd
+helm install --create-namespace --namespace=metrics metrics ./services/metrics
 ```
 
 Wait for the `traefik` pod ta setup DO LB:
