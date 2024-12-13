@@ -81,6 +81,8 @@ kong:
         kubernetes.io/ingress.class: traefik
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
+        # auth the forward-auth middleware from apps namespace
+        traefik.ingress.kubernetes.io/router.middlewares: apps-orward-auth@kubernetescrd
 
       hostname: rso-2.janvasiljevic.com
       path: /api
