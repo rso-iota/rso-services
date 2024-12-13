@@ -5,10 +5,15 @@ kong:
     admin_gui_url: "https://rso-2.janvasiljevic.com/kong-manager"
     admin_gui_api_url: "https://rso-2.janvasiljevic.com/kong-manager-api"
 
-
   ingressController:
     enabled: true
     ingressClass: kong  # Required for k8s Ingress manifests
+
+  autoscaling:
+    # Obviously not the best, but we don't have unlimited resources and it's only a demo
+    minReplicas: 1
+    maxReplicas: 1
+
 
   extraObjects:
     - apiVersion: traefik.io/v1alpha1
@@ -63,7 +68,6 @@ kong:
       hostname: rso-2.janvasiljevic.com
       pathType: Prefix
       path: /kong-manager
-
 
 
   proxy:
