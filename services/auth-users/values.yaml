@@ -1,0 +1,12 @@
+auth:
+  replicaCount: 1
+  internalPort: 8080
+
+image:
+  name: "ghcr.io/rso-iota/rso-auth-users"
+  tag: "latest"
+
+config:
+  contextPath: "/api/lobby"
+
+dns: rso-2.janvasiljevic.com

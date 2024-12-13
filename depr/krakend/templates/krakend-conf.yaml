@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: krakend-cm
+  labels:
+    name: krakend-cm
+data:
+  krakend.yaml: |
+    $schema: "https://www.krakend.io/schema/v2.8/krakend.json"
+    version: 3
+    disable_rest: true
+    endpoints:
+      - endpoint: "/api/lobby/"
+        extra_config:
+          auth/validator:
+            alg: "RS256"
+            jwk_url: "http://KEYCLOAK:8080/realms/master/protocol/openid-connect/certs"
+            disable_jwk_security: true
+        backend:
+          - url_pattern: "/api/lobby"
+            host:
+              - "http://lobby-svc:80"
+    extra_config:
+      telemetry/logging:
+        level: "DEBUG"
+        stdout: true
+        syslog: false
+        prefix: "[THIS IS WORKING]"

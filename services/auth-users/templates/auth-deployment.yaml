@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: auth-app
+  name: auth-app-deployment
+spec:
+  replicas: {{ .Values.auth.replicaCount }}
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: auth-app
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: auth-app
+    spec:
+      containers:
+        - image: {{ .Values.image.name}}:{{ .Values.image.tag }}
+          imagePullPolicy: Always
+          name: auth-app
+          resources: { }
+          env:
+            - name: SERVER_SERVLET_CONTEXT_PATH
+              value: {{ .Values.config.contextPath }}
+          ports:
+            - containerPort: {{ .Values.auth.internalPort }}
+          livenessProbe:
+            httpGet:
+              path: {{.Values.config.contextPath }}/actuator/health/liveness
+              port: {{ .Values.auth.internalPort }}
+          readinessProbe:
+            httpGet:
+              path: {{.Values.config.contextPath }}/actuator/health/readiness
+              port: {{ .Values.auth.internalPort }}
+
