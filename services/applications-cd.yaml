@@ -114,14 +114,14 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: krakend-app
+  name: kong
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/rso-iota/rso-services.git
     targetRevision: HEAD
-    path: services/krakend
+    path: services/kong
   syncPolicy:
     automated:
       selfHeal: true
@@ -129,4 +129,4 @@ spec:
       - CreateNamespace=true
   destination:
     server: https://kubernetes.default.svc
-    namespace: apps
+    namespace: kong
