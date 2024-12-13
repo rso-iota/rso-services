@@ -10,3 +10,4 @@ config:
   contextPath: "/api/auth"
 
 dns: rso-2.janvasiljevic.com
+svcName: auth-svc
