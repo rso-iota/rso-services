@@ -7,6 +7,6 @@ image:
   tag: "latest"
 
 config:
-  contextPath: "/api/lobby"
+  contextPath: "/api/auth"
 
 dns: rso-2.janvasiljevic.com
