@@ -24,9 +24,16 @@ spec:
         - image: {{ .Values.image.name}}:{{ .Values.image.tag }}
           imagePullPolicy: Always
           name: lobby-app
-          resources: { }
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              memory: 128Mi
           env:
-            # set context path
+            - name: SERVER_TOMCAT_MAX_THREADS
+              value: "20"
+            - name: JAVA_OPTS
+              value: "-Xms100m -Xmx256m -XX:+UseSerialGC -Xss512k -XX:MaxRAM=100m"
             - name: SERVER_SERVLET_CONTEXT_PATH
               value: {{ .Values.config.contextPath }}
             - name: SPRING_DATASOURCE_URL
