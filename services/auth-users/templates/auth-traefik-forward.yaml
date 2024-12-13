@@ -5,6 +5,6 @@ metadata:
   name: forward-auth
 spec:
   forwardAuth:
-    address: http://{{.Values.svcName}}/{{ .Values.config.contextPath}}/auth
+    address: http://auth-svc:80{{ .Values.config.contextPath}}/auth
     trustForwardHeader: true
 
