@@ -5,9 +5,8 @@ metadata:
   namespace: apps
 spec:
   ports:
-    - name: 80-{{ .Values.lobby.internalPort }}
+    - protocol: TCP
       port: 80
-      protocol: TCP
       targetPort: {{ .Values.lobby.internalPort }}
   selector:
     app: lobby-app

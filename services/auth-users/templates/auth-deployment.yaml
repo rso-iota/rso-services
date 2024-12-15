@@ -26,7 +26,7 @@ spec:
           name: auth-app
           resources:
             limits:
-              memory: 256Mi
+              memory: 512Mi
             requests:
               memory: 128Mi
           env:
@@ -36,8 +36,6 @@ spec:
               value: "-Xms100m -Xmx256m -XX:+UseSerialGC -Xss512k -XX:MaxRAM=100m"
             - name: SERVER_SERVLET_CONTEXT_PATH
               value: {{ .Values.config.contextPath }}
-{{/*            - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY*/}}
-{{/*              value: DEBUG*/}}
           ports:
             - containerPort: {{ .Values.auth.internalPort }}
           livenessProbe:

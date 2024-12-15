@@ -5,9 +5,8 @@ metadata:
   namespace: apps
 spec:
   ports:
-    - name: 80-{{ .Values.auth.internalPort }}
+    - protocol: TCP
       port: 80
-      protocol: TCP
       targetPort: {{ .Values.auth.internalPort }}
   selector:
     app: auth-app
