@@ -7,5 +7,5 @@ appPort: 80
 
 env:
   backendApi: "http://rso-lobby:8080/backend"
-  keycloakAuthority: "http://keycloak:8080/auth/realms/rso"
-  keycloakClientId: "rso-game"
+  keycloakAuthority: "https://rso-keycloak.janvasiljevic.com/realms/test"
+  keycloakClientId: "test-client"

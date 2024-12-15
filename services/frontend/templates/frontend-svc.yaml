@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rso-frontend-svc
+  namespace: apps
+spec:
+  selector:
+    app: rso-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: {{ .Values.appPort }}
