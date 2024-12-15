@@ -96,8 +96,8 @@ metadata:
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/write-back-method: argocd
-    argocd-image-updater.argoproj.io/image-list: game=ghcr.io/rso-iota/rso-auth-users:latest
-    argocd-image-updater.argoproj.io/game.update-strategy: digest
+    argocd-image-updater.argoproj.io/image-list: auth=ghcr.io/rso-iota/rso-auth-users:latest
+    argocd-image-updater.argoproj.io/auth.update-strategy: digest
 spec:
   project: default
   syncPolicy:
