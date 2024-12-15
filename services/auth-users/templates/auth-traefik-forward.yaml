@@ -17,6 +17,7 @@ spec:
     accessControlAllowCredentials: true
     accessControlAllowMethods: [ "*" ]
     accessControlAllowOriginList: [ "*" ]
+    accessControlAllowHeaders: [ "*" ]
     accessControlMaxAge: 100
     addVaryHeader: true
 
