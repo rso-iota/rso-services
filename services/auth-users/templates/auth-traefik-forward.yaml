@@ -7,4 +7,18 @@ spec:
   forwardAuth:
     address: http://auth-svc.{{ .Release.Namespace }}:80{{ .Values.config.contextPath}}/auth
     trustForwardHeader: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: cors
+spec:
+  headers:
+    accessControlAllowCredentials: true
+    accessControlAllowMethods: [ "*" ]
+    accessControlAllowOriginList: [ "*" ]
+    accessControlMaxAge: 100
+    addVaryHeader: true
+
+
 

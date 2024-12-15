@@ -30,8 +30,8 @@ kong:
     - apiVersion: v1
       kind: ConfigMap
       metadata:
-          name: kong-plugin-keycloak
-          namespace: kong
+        name: kong-plugin-keycloak
+        namespace: kong
       data:
 
 
@@ -43,15 +43,15 @@ kong:
     tls:
       enabled: false
     ingress:
-        enabled: true
-        annotations:
-            kubernetes.io/ingress.class: traefik
-            traefik.ingress.kubernetes.io/router.entrypoints: websecure
-            traefik.ingress.kubernetes.io/router.tls: "true"
-            traefik.ingress.kubernetes.io/router.middlewares: kong-strip-kong-manager-api@kubernetescrd
-        hostname: rso-2.janvasiljevic.com
-        pathType: Prefix
-        path: /kong-manager-api
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: traefik
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.middlewares: kong-strip-kong-manager-api@kubernetescrd
+      hostname: rso-2.janvasiljevic.com
+      pathType: Prefix
+      path: /kong-manager-api
 
   manager:
     type: ClusterIP
@@ -86,8 +86,7 @@ kong:
         kubernetes.io/ingress.class: traefik
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
-        # auth the forward-auth middleware from apps namespace
-        traefik.ingress.kubernetes.io/router.middlewares: apps-forward-auth@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: apps-cors@kubernetescrd,apps-forward-auth@kubernetescrd
 
       hostname: rso-2.janvasiljevic.com
       path: /api
