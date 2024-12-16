@@ -6,6 +6,7 @@ metadata:
   namespace: apps
   annotations:
     kubernetes.io/ingress.class: kong
+    konghq.com/plugins: cors-plugin
 spec:
   rules:
     - host: {{ .Values.dns }}
