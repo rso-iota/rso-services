@@ -1,0 +1,25 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: cors-plugin
+plugin: cors
+config:
+  origins:
+    - "*"
+  headers:
+    - "*"
+  exposed_headers:
+    - "X-User-Sub"
+    - "x-user-sub"
+    - "X-User-Email"
+    - "x-user-email"
+  credentials: true
+  max_age: 3600
+  preflight_continue: true
+
+
+
+
+
+
+
