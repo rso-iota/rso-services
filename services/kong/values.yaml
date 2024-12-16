@@ -4,8 +4,6 @@ kong:
     admin_gui_path: "/kong-manager"
     admin_gui_url: "https://rso-2.janvasiljevic.com/kong-manager"
     admin_gui_api_url: "https://rso-2.janvasiljevic.com/kong-manager-api"
-    admin_access_log: '/dev/stdout structured_logs'
-    proxy_access_log: '/dev/stdout structured_logs'
     log_level: "debug"
 
 
