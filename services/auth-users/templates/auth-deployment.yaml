@@ -36,6 +36,11 @@ spec:
               value: "-Xms100m -Xmx256m -XX:+UseSerialGC -Xss512k -XX:MaxRAM=100m"
             - name: SERVER_SERVLET_CONTEXT_PATH
               value: {{ .Values.config.contextPath }}
+              {{- range $key, $value := .Values.env }}
+            - name: SVC_{{ $key | upper }}
+              value: {{ $value | quote }}
+              {{- end }}
+          # template from {{ .Values.env }} and add SVC_ PREFix to all keys (names)
           ports:
             - containerPort: {{ .Values.auth.internalPort }}
           livenessProbe:

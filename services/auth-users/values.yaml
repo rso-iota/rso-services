@@ -9,5 +9,18 @@ image:
 config:
   contextPath: "/api/auth"
 
+env:
+  # Most of these settings should be set in ArgoCD so they aren't pushed to the repo
+  KEYCLOAK_AUTH_SERVER_URL: "https://rso-keycloak.janvasiljevic.com"
+  KEYCLOAK_CLIENT_ID: "external-client"
+  KEYCLOAK_REALM: "test"
+  KEYCLOAK_ADMIN_SERVER_URL: "https://rso-keycloak.janvasiljevic.com"
+  KEYCLOAK_ADMIN_CLIENT_ID: ""
+  KEYCLOAK_ADMIN_REALM: ""
+  KEYCLOAK_ADMIN_USERNAME: ""
+  KEYCLOAK_ADMIN_PASSWORD: ""
+  KEYCLOAK_FRONTEND_CLIENT_ID: "frontend-client"
+  AUTH_FORWARD_LOG_X_FORWARDED_HEADERS: "true"
+
 dns: rso-2.janvasiljevic.com
 svcName: auth-svc
