@@ -4,6 +4,7 @@ kong:
     admin_gui_path: "/kong-manager"
     admin_gui_url: "https://rso-2.janvasiljevic.com/kong-manager"
     admin_gui_api_url: "https://rso-2.janvasiljevic.com/kong-manager-api"
+    log_level: "debug"
 
   ingressController:
     enabled: true
