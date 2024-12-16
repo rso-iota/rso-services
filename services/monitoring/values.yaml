@@ -1,0 +1,171 @@
+k8s-monitoring:
+  cluster:
+    name: RSO
+
+  global:
+    # increasing this to higher numbers - this is a PoC after all
+    scrapeInterval: 45s
+
+  destinations:
+    - name: prometheus
+      type: prometheus
+      url: http://monitoring-prometheus-server:80/api/v1/write
+    - name: loki
+      type: loki
+      url: http://loki-headless:3100/loki/api/v1/push
+
+  alloy-logs:
+    enabled: true
+
+  podLogs:
+    enabled: true
+    namespaces:
+      - apps
+      - traefik
+      - kong
+      - keycloak
+
+  clusterMetrics:
+    enabled: true
+
+    opencost:
+      # we don't need costs really
+      enabled: false
+
+    kepler:
+      # no need for energy metrics
+      enabled: false
+
+  alloy-metrics:
+    enabled: true
+
+prometheus:
+  server:
+    global:
+      # increasing this to higher numbers - this is a PoC after all
+      scrape_interval: 45s
+      evaluation_interval: 45s
+
+    # enable grpc for remote write using alloy
+    extraArgs:
+      web.enable-remote-write-receiver: null
+      storage.tsdb.retention.size: 1GB
+
+  alertmanager:
+    enabled: false
+
+  kube-state-metrics:
+    enabled: false
+
+  prometheus-node-exporter:
+    enabled: false
+
+  prometheus-pushgateway:
+    enabled: false
+
+loki:
+  deploymentMode: SingleBinary
+  write:
+    replicas: 0
+  read:
+    replicas: 0
+  backend:
+    replicas: 0
+  singleBinary:
+    replicas: 1
+    persistence:
+      storageClass: do-block-storage
+  loki:
+    schemaConfig:
+      configs:
+        - from: "2024-04-01"
+          store: tsdb
+          object_store: filesystem
+          schema: v13
+          index:
+            prefix: loki_index_
+            period: 24h
+    auth_enabled: "false"
+    commonConfig:
+      replication_factor: 1
+    storage:
+      type: 'filesystem'
+    compactor:
+      retention_enabled: true
+      compaction_interval: 10m
+      delete_request_store: filesystem
+    query_scheduler:
+      max_outstanding_requests_per_tenant: 4096
+    frontend:
+      max_outstanding_per_tenant: 4096
+    limits_config:
+      retention_period: 4h # Lets keep it show for PoC
+      split_queries_by_interval: 15m
+      max_query_series: 100000
+      max_query_parallelism: 32
+
+  chunksCache:
+    enabled: false
+
+  lokiCanary:
+    enabled: true
+
+  # Zero out replica counts of other deployment modes
+  ingester:
+    replicas: 0
+  querier:
+    replicas: 0
+  queryFrontend:
+    replicas: 0
+  queryScheduler:
+    replicas: 0
+  distributor:
+    replicas: 0
+  compactor:
+    replicas: 0
+  indexGateway:
+    replicas: 0
+  bloomCompactor:
+    replicas: 0
+  bloomGateway:
+    replicas: 0
+
+grafana:
+  grafana.ini:
+    server:
+      domain: rso-2.janvasiljevic.com
+      serve_from_sub_path: true
+      root_url: https://rso-2.janvasiljevic.com/monitoring
+
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          orgId: 1
+          url: http://monitoring-prometheus-server:80
+          isDefault: true
+        - name: Loki
+          type: loki
+          access: proxy
+          orgId: 1
+          url: http://loki-headless:3100
+          isDefault: false
+
+  ingress:
+    enabled: true
+    path: /monitoring
+    pathType: Prefix
+    annotations:
+      kubernetes.io/ingress.class: traefik
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - rso-2.janvasiljevic.com
+
+
+
+
+

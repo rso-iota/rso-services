@@ -6,9 +6,10 @@ traefik:
   logs:
     general:
       noColor: true
-      level: DEBUG
+      format: json
     access:
       enabled: true
+      format: json
 
   ports:
     traefik:

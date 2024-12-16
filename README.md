@@ -25,6 +25,7 @@ helm dep up ./services/cert-manager
 helm dep up ./services/traefik
 helm dep up ./services/argocd
 helm dep up ./services/kong
+helm dep up ./services/monitoring
 ```
 
 Update your email in `./lets-encrypt-issuer.yaml` and then:
@@ -40,6 +41,9 @@ helm install --create-namespace --namespace=cert-manager cert-manager ./services
 helm install --create-namespace --namespace=traefik traefik ./services/traefik
 helm install --create-namespace --namespace=argocd argocd ./services/argocd
 helm install --create-namespace --namespace=metrics metrics ./services/metrics
+helm install --create-namespace --namespace=monitoring monitoring ./services/monitoring
+
+helm upgrade monitoring ./services/monitoring --namespace=monitoring
 ```
 
 Wait for the `traefik` pod ta setup DO LB:

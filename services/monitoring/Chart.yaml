@@ -1,0 +1,20 @@
+apiVersion: v2
+name: rso-monitoring
+version: "1.0.0"
+dependencies:
+  - name: k8s-monitoring
+    version: 2.0.0-rc.9
+    repository: https://grafana.github.io/helm-charts
+  - name: prometheus
+    version: 26.0.1
+    repository: https://prometheus-community.github.io/helm-charts
+  - name: prometheus-operator-crds
+    version: 17.0.0
+    repository: https://prometheus-community.github.io/helm-charts
+  - name: grafana
+    version: 8.8.1
+    repository: https://grafana.github.io/helm-charts
+  - name: loki
+    version: 6.24.0-weekly.232
+    repository: https://grafana.github.io/helm-charts
+
