@@ -6,6 +6,9 @@ metadata:
 spec:
   forwardAuth:
     address: http://auth-svc.{{ .Release.Namespace }}:80{{ .Values.config.contextPath}}/auth
+    authResponseHeaders:
+      - X-User-Sub
+      - X-User-Email
     trustForwardHeader: true
 ---
 apiVersion: traefik.io/v1alpha1
