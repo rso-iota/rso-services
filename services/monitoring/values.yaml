@@ -22,7 +22,7 @@ k8s-monitoring:
     namespaces:
       - apps
       - traefik
-      - kong
+      # - kong # we don't really need kong
       - keycloak
 
   clusterMetrics:
