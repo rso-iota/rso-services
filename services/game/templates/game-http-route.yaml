@@ -25,6 +25,20 @@ spec:
     addVaryHeader: true
 ---
 
+{{- $replicasMid := .Values.game.replicaCount | int -}}
+{{- range $i, $e := until $replicasMid }}
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: strip-server-path-{{ $i }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  stripPrefix:
+    prefixes:
+      - "/server/{{ $i }}/"
+{{- end }}
+---
+
 # Targets stateful sets of the game services
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
@@ -45,6 +59,8 @@ spec:
       middlewares:
         - name: cors-game
           namespace: {{ $.Release.Namespace }}
+        - name: strip-server-path-{{ $i }}
+          namespace: {{ $.Release.Namespace }}
     - match: "PathPrefix(`/server/`) && Path(`/server/{{ $i }}/ws`)"
       kind: Rule
       services:
@@ -55,5 +71,7 @@ spec:
         - name: websocket-headers
           namespace: {{ $.Release.Namespace }}
         - name: cors-game
+          namespace: {{ $.Release.Namespace }}
+        - name: strip-server-path-{{ $i }}
           namespace: {{ $.Release.Namespace }}
     {{- end }}
