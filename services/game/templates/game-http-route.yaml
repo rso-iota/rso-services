@@ -26,7 +26,8 @@ spec:
 ---
 
 {{- $replicasMid := .Values.game.replicaCount | int -}}
-{{- range $j, $e := until $replicasMid }}
+{{- range $j := until $replicasMid }}
+---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
@@ -36,9 +37,8 @@ spec:
   stripPrefix:
     prefixes:
       - "/server/{{ $j }}/"
-{{- end }}
 ---
-
+{{- end }}
 # Targets stateful sets of the game services
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
