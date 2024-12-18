@@ -1,0 +1,20 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: game-service
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: "PathPrefix(`/server/`) && Path(`/server/{id:[0-9]+}`)"
+      kind: Rule
+      services:
+        - name: game-service-{id}-test
+          port: 8080
+    - match: "PathPrefix(`/server/`) && Path(`/server/{id:[0-9]+}/ws`)"
+      kind: Rule
+      services:
+        - name: game-service-{id}-test
+          port: 8080
+      middlewares:
+        - name: websocket-headers
