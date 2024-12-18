@@ -13,7 +13,7 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: cors
+  name: cors-game
   namespace: {{ .Release.Namespace }}
 spec:
   headers:
@@ -40,7 +40,7 @@ spec:
         - name: game-app-statefulset-{id}.game-svc.{{ .Release.Namespace }}
           port: 8080
       middlewares:
-        - name: cors
+        - name: cors-game
           namespace: {{ .Release.Namespace }}
     - match: "PathPrefix(`/server/`) && Path(`/server/{id:[0-9]+}/ws`)"
       kind: Rule
@@ -50,5 +50,5 @@ spec:
       middlewares:
         - name: websocket-headers
           namespace: {{ .Release.Namespace }}
-        - name: cors
+        - name: cors-game
           namespace: {{ .Release.Namespace }}
