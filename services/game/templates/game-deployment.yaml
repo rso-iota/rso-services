@@ -24,5 +24,8 @@ spec:
               name: grpc
           imagePullPolicy: Always
           name: game-app
-          resources: { }
+          resources:
+            requests:
+              memory: "20Mi"
+
 
