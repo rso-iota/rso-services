@@ -34,23 +34,26 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: "PathPrefix(`/server/`) && Path(`/server/{id:[0-9]+}`)"
+    {{- $replicas := .Values.game.replicaCount | int -}}
+    {{- range $i, $e := until $replicas }}
+    - match: "PathPrefix(`/server/`) && Path(`/server/{{ $i }}/`)"
       kind: Rule
       services:
-        - name: game-app-statefulset-{id}.game-svc
-          namespace: {{ .Release.Namespace }}
+        - name: game-app-statefulset-{{ $i }}.game-svc
+          namespace: {{ $.Release.Namespace }}
           port: 8080
       middlewares:
         - name: cors-game
-          namespace: {{ .Release.Namespace }}
-    - match: "PathPrefix(`/server/`) && Path(`/server/{id:[0-9]+}/ws`)"
+          namespace: {{ $.Release.Namespace }}
+    - match: "PathPrefix(`/server/`) && Path(`/server/{{ $i }}/ws`)"
       kind: Rule
       services:
-        - name: game-app-statefulset-{id}.game-svc
-          namespace: {{ .Release.Namespace }}
+        - name: game-app-statefulset-{{ $i }}.game-svc
+          namespace: {{ $.Release.Namespace }}
           port: 8080
       middlewares:
         - name: websocket-headers
-          namespace: {{ .Release.Namespace }}
+          namespace: {{ $.Release.Namespace }}
         - name: cors-game
-          namespace: {{ .Release.Namespace }}
+          namespace: {{ $.Release.Namespace }}
+    {{- end }}
