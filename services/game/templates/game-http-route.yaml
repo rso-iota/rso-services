@@ -53,7 +53,7 @@ metadata:
     kubernetes.io/ingress.class: traefik
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.middlewares: {{ $.Release.Namespace }}-cors-game,{{ $.Release.Namespace }}-strip-server-path-{{ $i }}
+    traefik.ingress.kubernetes.io/router.middlewares: {{ $.Release.Namespace }}-cors-game@kubernetescrd,{{ $.Release.Namespace }}-strip-server-path-{{ $i }}@kubernetescrd
 spec:
   rules:
     - host: {{ $.Values.dns }}
