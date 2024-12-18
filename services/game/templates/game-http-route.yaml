@@ -1,3 +1,30 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: websocket-headers
+  namespace: {{ .Release.Namespace }}
+spec:
+  headers:
+    customRequestHeaders:
+      Upgrade: "{http_upgrade}"
+      Connection: "Upgrade"
+      Host: "{host}"
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: cors
+  namespace: {{ .Release.Namespace }}
+spec:
+  headers:
+    accessControlAllowCredentials: true
+    accessControlAllowMethods: [ "*" ]
+    accessControlAllowOriginList: [ "*" ]
+    accessControlAllowHeaders: [ "*" ]
+    accessControlMaxAge: 100
+    addVaryHeader: true
+---
+
 # Targets stateful sets of the game services
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
@@ -12,6 +39,9 @@ spec:
       services:
         - name: game-app-statefulset-{id}.game-svc.{{ .Release.Namespace }}
           port: 8080
+      middlewares:
+        - name: cors
+          namespace: {{ .Release.Namespace }}
     - match: "PathPrefix(`/server/`) && Path(`/server/{id:[0-9]+}/ws`)"
       kind: Rule
       services:
@@ -19,3 +49,6 @@ spec:
           port: 8080
       middlewares:
         - name: websocket-headers
+          namespace: {{ .Release.Namespace }}
+        - name: cors
+          namespace: {{ .Release.Namespace }}
