@@ -54,7 +54,6 @@ spec:
       kind: Rule
       services:
         - name: game-app-statefulset-{{ $i }}.game-svc.{{ $.Release.Namespace }}
-          namespace: {{ $.Release.Namespace }}
           port: 8080
       middlewares:
         - name: cors-game
