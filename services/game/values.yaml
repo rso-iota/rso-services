@@ -3,4 +3,4 @@ image:
   tag: "latest"
 
 game:
-  replicaCount: 1
+  replicaCount: 3
