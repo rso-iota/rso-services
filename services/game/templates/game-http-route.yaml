@@ -39,7 +39,7 @@ spec:
     - match: "PathPrefix(`/server/`) && Path(`/server/{{ $i }}/`)"
       kind: Rule
       services:
-        - name: game-app-statefulset-{{ $i }}.game-svc
+        - name: game-app-statefulset-{{ $i }}.game-svc.{{ $.Release.Namespace }}
           namespace: {{ $.Release.Namespace }}
           port: 8080
       middlewares:
@@ -48,7 +48,7 @@ spec:
     - match: "PathPrefix(`/server/`) && Path(`/server/{{ $i }}/ws`)"
       kind: Rule
       services:
-        - name: game-app-statefulset-{{ $i }}.game-svc
+        - name: game-app-statefulset-{{ $i }}.game-svc.{{ $.Release.Namespace }}
           namespace: {{ $.Release.Namespace }}
           port: 8080
       middlewares:
