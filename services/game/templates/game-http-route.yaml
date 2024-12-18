@@ -59,14 +59,14 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: game-app-statefulset-{{ $i }}.game-svc.{{ $.Release.Namespace }}
+                name: game-app-statefulset-{{ $i }}
                 port:
                   number: 8080
           - path: /server/{{ $i }}/ws
             pathType: Prefix
             backend:
               service:
-                name: game-app-statefulset-{{ $i }}.game-svc.{{ $.Release.Namespace }}
+                name: game-app-statefulset-{{ $i }}
                 port:
                   number: 8080
     {{- end }}
