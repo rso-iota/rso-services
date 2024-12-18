@@ -42,6 +42,7 @@ spec:
 
 {{- $replicas := .Values.game.replicaCount | int -}}
 {{- range $i, $e := until $replicas }}
+---
 # Targets stateful sets of the game services
 apiVersion: networking.k8s.io/v1
 kind: Ingress
