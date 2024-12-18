@@ -4,3 +4,5 @@ image:
 
 game:
   replicaCount: 3
+
+dns: rso-2.janvasiljevic.com

@@ -54,8 +54,8 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: {{ $.Release.Namespace }}-cors-game,{{ $.Release.Namespace }}-strip-server-path-{{ $i }}
 spec:
   rules:
-
-    - http:
+    - host: {{ $.Values.dns }}
+      http:
         paths:
           - path: /server/{{ $i }}/
             pathType: Prefix
