@@ -1,14 +1,14 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: websocket-headers
+  name: ssl-header
   namespace: {{ .Release.Namespace }}
 spec:
   headers:
     customRequestHeaders:
-      Upgrade: "{http_upgrade}"
-      Connection: "Upgrade"
-      Host: "{host}"
+      Connection: keep-alive, Upgrade
+      Upgrade: WebSocket
+
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
@@ -53,7 +53,7 @@ metadata:
     kubernetes.io/ingress.class: traefik
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.middlewares: {{ $.Release.Namespace }}-cors-game@kubernetescrd,{{ $.Release.Namespace }}-strip-server-path-{{ $i }}@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: {{ $.Release.Namespace }}-cors-game@kubernetescrd,{{ $.Release.Namespace }}-strip-server-path-{{ $i }}@kubernetescrd,{{ $.Release.Namespace }}-ssl-header@kubernetescrd
 spec:
   rules:
     - host: {{ $.Values.dns }}
