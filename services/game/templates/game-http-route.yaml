@@ -39,38 +39,34 @@ spec:
       - "/server/{{ $j }}/"
 ---
 {{- end }}
+
+{{- $replicas := .Values.game.replicaCount | int -}}
+{{- range $i, $e := until $replicas }}
 # Targets stateful sets of the game services
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
   name: game-service
+  namespace: {{ $.Release.Namespace }}
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: {{ $.Release.Namespace }}-cors-game,{{ $.Release.Namespace }}-strip-server-path-{{ $i }}
 spec:
-  entryPoints:
-    - web
-  routes:
-    {{- $replicas := .Values.game.replicaCount | int -}}
-    {{- range $i, $e := until $replicas }}
-    - match: "PathPrefix(`/server/`) && Path(`/server/{{ $i }}/`)"
-      kind: Rule
-      services:
-        - name: game-app-statefulset-{{ $i }}.game-svc.{{ $.Release.Namespace }}
-          port: 8080
-      middlewares:
-        - name: cors-game
-          namespace: {{ $.Release.Namespace }}
-        - name: strip-server-path-{{ $i }}
-          namespace: {{ $.Release.Namespace }}
-    - match: "PathPrefix(`/server/`) && Path(`/server/{{ $i }}/ws`)"
-      kind: Rule
-      services:
-        - name: game-app-statefulset-{{ $i }}.game-svc.{{ $.Release.Namespace }}
-          namespace: {{ $.Release.Namespace }}
-          port: 8080
-      middlewares:
-        - name: websocket-headers
-          namespace: {{ $.Release.Namespace }}
-        - name: cors-game
-          namespace: {{ $.Release.Namespace }}
-        - name: strip-server-path-{{ $i }}
-          namespace: {{ $.Release.Namespace }}
+  rules:
+
+    - http:
+        paths:
+          - path: /server/{{ $i }}/
+            pathType: Prefix
+            backend:
+              service:
+                name: game-app-statefulset-{{ $i }}.game-svc.{{ $.Release.Namespace }}
+                port:
+                  number: 8080
+          - path: /server/{{ $i }}/ws
+            pathType: Prefix
+            backend:
+              service:
+                name: game-app-statefulset-{{ $i }}.game-svc.{{ $.Release.Namespace }}
+                port:
+                  number: 8080
     {{- end }}

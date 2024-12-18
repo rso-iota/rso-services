@@ -1,0 +1,195 @@
+---
+# Source: rso-game/templates/game-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: game-svc
+  namespace: apps
+spec:
+  selector:
+    app: game-app
+  ports:
+    - protocol: TCP
+      name: httpws
+      port: 8080
+      targetPort: 8080
+    - protocol: TCP
+      name: grpc
+      port: 8081
+      targetPort: 8081
+---
+# Source: rso-game/templates/game-deployment.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: game-app
+  name: game-app-statefulset
+spec:
+  replicas: 3
+  serviceName: game-svc
+  selector:
+    matchLabels:
+      app: game-app
+  template:
+    metadata:
+      labels:
+        app: game-app
+    spec:
+      containers:
+        - image: ghcr.io/rso-iota/rso-game:latest
+          ports:
+            - containerPort: 8080
+              name: httpws
+            - containerPort: 8081
+              name: grpc
+          imagePullPolicy: Always
+          name: game-app
+          resources: { }
+---
+# Source: rso-game/templates/game-http-route.yaml
+# Targets stateful sets of the game services
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: game-service
+  namespace: default
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: default-cors-game,default-strip-server-path-0
+spec:
+  rules:
+
+    - http:
+        paths:
+          - path: /server/0/
+            pathType: Prefix
+            backend:
+              service:
+                name: game-app-statefulset-0.game-svc.default
+                port:
+                  number: 8080
+          - path: /server/0/ws
+            pathType: Prefix
+            backend:
+              service:
+                name: game-app-statefulset-0.game-svc.default
+                port:
+                  number: 8080
+# Targets stateful sets of the game services
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: game-service
+  namespace: default
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: default-cors-game,default-strip-server-path-1
+spec:
+  rules:
+
+    - http:
+        paths:
+          - path: /server/1/
+            pathType: Prefix
+            backend:
+              service:
+                name: game-app-statefulset-1.game-svc.default
+                port:
+                  number: 8080
+          - path: /server/1/ws
+            pathType: Prefix
+            backend:
+              service:
+                name: game-app-statefulset-1.game-svc.default
+                port:
+                  number: 8080
+# Targets stateful sets of the game services
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: game-service
+  namespace: default
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: default-cors-game,default-strip-server-path-2
+spec:
+  rules:
+
+    - http:
+        paths:
+          - path: /server/2/
+            pathType: Prefix
+            backend:
+              service:
+                name: game-app-statefulset-2.game-svc.default
+                port:
+                  number: 8080
+          - path: /server/2/ws
+            pathType: Prefix
+            backend:
+              service:
+                name: game-app-statefulset-2.game-svc.default
+                port:
+                  number: 8080
+---
+# Source: rso-game/templates/game-http-route.yaml
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: websocket-headers
+  namespace: default
+spec:
+  headers:
+    customRequestHeaders:
+      Upgrade: "{http_upgrade}"
+      Connection: "Upgrade"
+      Host: "{host}"
+---
+# Source: rso-game/templates/game-http-route.yaml
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: cors-game
+  namespace: default
+spec:
+  headers:
+    accessControlAllowCredentials: true
+    accessControlAllowMethods: [ "*" ]
+    accessControlAllowOriginList: [ "*" ]
+    accessControlAllowHeaders: [ "*" ]
+    accessControlMaxAge: 100
+    addVaryHeader: true
+---
+# Source: rso-game/templates/game-http-route.yaml
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: strip-server-path-0
+  namespace: default
+spec:
+  stripPrefix:
+    prefixes:
+      - "/server/0/"
+---
+# Source: rso-game/templates/game-http-route.yaml
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: strip-server-path-1
+  namespace: default
+spec:
+  stripPrefix:
+    prefixes:
+      - "/server/1/"
+---
+# Source: rso-game/templates/game-http-route.yaml
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: strip-server-path-2
+  namespace: default
+spec:
+  stripPrefix:
+    prefixes:
+      - "/server/2/"
