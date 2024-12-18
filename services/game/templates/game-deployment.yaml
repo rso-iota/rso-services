@@ -1,19 +1,14 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app: game-app
-  name: game-app-deployment
+  name: game-app-statefulset
 spec:
   replicas: {{ .Values.game.replicaCount }}
   selector:
     matchLabels:
       app: game-app
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
   template:
     metadata:
       labels:
