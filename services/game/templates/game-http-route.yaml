@@ -37,7 +37,8 @@ spec:
     - match: "PathPrefix(`/server/`) && Path(`/server/{id:[0-9]+}`)"
       kind: Rule
       services:
-        - name: game-app-statefulset-{id}.game-svc.{{ .Release.Namespace }}
+        - name: game-app-statefulset-{id}.game-svc
+          namespace: {{ .Release.Namespace }}
           port: 8080
       middlewares:
         - name: cors-game
@@ -45,7 +46,8 @@ spec:
     - match: "PathPrefix(`/server/`) && Path(`/server/{id:[0-9]+}/ws`)"
       kind: Rule
       services:
-        - name: game-app-statefulset-{id}.game-svc.{{ .Release.Namespace }}
+        - name: game-app-statefulset-{id}.game-svc
+          namespace: {{ .Release.Namespace }}
           port: 8080
       middlewares:
         - name: websocket-headers
