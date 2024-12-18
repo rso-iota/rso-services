@@ -1,19 +1,24 @@
-
-
+{{- $replicas := .Values.game.replicaCount | int -}}
+{{- $namespace := .Release.Namespace  }}
+{{- range $i,$e := until $replicas }}
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: game-svc
-  namespace: apps
+  labels:
+    statefulset.kubernetes.io/pod-name: game-app-statefulset-{{ $i }}
+  name: game-svc-{{ $i }}
+  namespace: {{ $namespace  }}
 spec:
-  selector:
-    app: game-app
   ports:
     - protocol: TCP
-      name: httpws
-      port: 8080
       targetPort: 8080
+      port: 8080
     - protocol: TCP
-      name: grpc
-      port: 8081
       targetPort: 8081
+      port: 8081
+  selector:
+    app: game-app
+    statefulset.kubernetes.io/pod-name: game-app-statefulset-{{ $i }}
+  type: LoadBalancer
+{{- end }}
