@@ -47,7 +47,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: game-service
+  name: game-service-ingress-{{ $i }}
   namespace: {{ $.Release.Namespace }}
   annotations:
     traefik.ingress.kubernetes.io/router.middlewares: {{ $.Release.Namespace }}-cors-game,{{ $.Release.Namespace }}-strip-server-path-{{ $i }}
