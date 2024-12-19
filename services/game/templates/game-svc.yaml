@@ -6,6 +6,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
+    app: game-app
     statefulset.kubernetes.io/pod-name: game-app-statefulset-{{ $i }}
   name: game-svc-{{ $i }}
   namespace: {{ $namespace  }}
