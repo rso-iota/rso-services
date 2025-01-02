@@ -23,7 +23,6 @@ env:
   KEYCLOAK_ADMIN_FRONTEND_REALM: "aga.rso"
   KEYCLOAK_FRONTEND_CLIENT_ID: "fe-client"
   AUTH_FORWARD_LOG_X_FORWARDED_HEADERS: "true"
-  LOGGING_STRUCTURED_FORMAT_CONSOLE: "ecs"
 
 dns: rso-2.janvasiljevic.com
 svcName: auth-svc
