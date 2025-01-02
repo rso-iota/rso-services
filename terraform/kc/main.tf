@@ -42,6 +42,7 @@ resource "keycloak_openid_client" "fe-client" {
   enabled               = true
   description           = "Used by the frontend to login over the browser"
   valid_redirect_uris = ["*"]
+  web_origins = ["*"]
   standard_flow_enabled = true
 }
 
