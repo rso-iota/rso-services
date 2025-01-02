@@ -27,6 +27,7 @@ helm dep up ./services/traefik
 helm dep up ./services/argocd
 helm dep up ./services/kong
 helm dep up ./services/monitoring
+helm dep up ./services/nats
 ```
 
 Update your email in `./lets-encrypt-issuer.yaml` and then:
@@ -44,6 +45,8 @@ helm install --create-namespace --namespace=argocd argocd ./services/argocd
 helm install --create-namespace --namespace=metrics metrics ./services/metrics
 helm install --create-namespace --namespace=monitoring monitoring ./services/monitoring
 helm install --create-namespace --namespace=keycloak keycloak ./services/keycloak
+
+helm install nats ./services/nats
 
 helm upgrade monitoring ./services/monitoring --namespace=monitoring
 helm upgrade keycloak ./services/keycloak --namespace=keycloak
