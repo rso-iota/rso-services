@@ -42,6 +42,8 @@ spec:
               value: {{ .Values.db.user }}
             - name: SPRING_DATASOURCE_PASSWORD
               value: {{ .Values.db.password }}
+            - name: LOGGING_STRUCTURED_FORMAT_CONSOLE
+              value: ecs
           ports:
             - containerPort: {{ .Values.lobby.internalPort }}
           livenessProbe:

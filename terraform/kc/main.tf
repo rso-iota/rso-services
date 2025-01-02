@@ -11,10 +11,10 @@ resource "keycloak_realm" "agarso-realm" {
   enabled                        = true
   remember_me                    = true
   registration_allowed           = true
-  reset_password_allowed         = true
+  reset_password_allowed         = false
   display_name                   = "Aga.rso"
-  registration_email_as_username = true
-  login_with_email_allowed       = true
+  registration_email_as_username = false
+  login_with_email_allowed       = false
   verify_email                   = false
 
   security_defenses {
@@ -23,7 +23,9 @@ resource "keycloak_realm" "agarso-realm" {
       wait_increment_seconds = 60
     }
   }
+
 }
+
 
 resource "keycloak_openid_client" "external-client" {
   realm_id              = keycloak_realm.agarso-realm.id
@@ -33,6 +35,7 @@ resource "keycloak_openid_client" "external-client" {
   description           = "Used by the auth/users service"
   valid_redirect_uris = ["*"]
   standard_flow_enabled = true
+  implicit_flow_enabled = true
 }
 
 resource "keycloak_openid_client" "fe-client" {
@@ -43,26 +46,35 @@ resource "keycloak_openid_client" "fe-client" {
   description           = "Used by the frontend to login over the browser"
   valid_redirect_uris = ["*"]
   web_origins = ["*"]
+  implicit_flow_enabled = true
   standard_flow_enabled = true
 }
 
 locals {
   users = [
     {
-      username = "jan"
-      password = "jan12345678"
+      username   = "jan"
+      first_name = "Jan"
+      last_name  = "RSO"
+      password   = "12345678"
     },
     {
-      username = "matej"
-      password = "matej12345678"
+      username   = "matej"
+      first_name = "Matej"
+      last_name  = "RSO"
+      password   = "12345678"
     },
     {
-      username = "ziga"
-      password = "ziga12345678"
+      username   = "ziga"
+      first_name = "Ziga"
+      last_name  = "RSO"
+      password   = "12345678"
     },
     {
-      username = "guest"
-      password = "guest12345678"
+      username   = "guest"
+      first_name = "Guest"
+      last_name  = "RSO"
+      password   = "12345678"
     }
   ]
 }
@@ -74,8 +86,8 @@ resource "keycloak_user" "users" {
   username       = each.value.username
   enabled        = true
   email          = "${each.value.username}@aga.rso"
-  first_name     = each.value.username
-  last_name      = "User"
+  first_name     = each.value.first_name
+  last_name      = each.value.last_name
 
   initial_password {
     value     = each.value.password
