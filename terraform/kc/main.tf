@@ -28,7 +28,7 @@ resource "keycloak_realm" "agarso-realm" {
 resource "keycloak_openid_client" "external-client" {
   realm_id              = keycloak_realm.agarso-realm.id
   client_id             = "external-client"
-  access_type           = "PUBLIC"
+  access_type           = "CONFIDENTIAL"
   enabled               = true
   description           = "Used by the auth/users service"
   valid_redirect_uris = ["*"]
