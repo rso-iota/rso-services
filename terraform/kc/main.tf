@@ -78,7 +78,26 @@ resource "keycloak_user" "users" {
   last_name      = "User"
 
   initial_password {
-    value = each.value.password
+    value     = each.value.password
     temporary = false
   }
+}
+
+
+resource "keycloak_oidc_identity_provider" "github" {
+  alias         = "github"
+  client_id     = var.gh_client_id
+  client_secret = var.gh_client_secret
+  realm         = keycloak_realm.agarso-realm.realm
+
+  provider_id = "github"
+
+  display_name = "GitHub"
+
+  enabled = true
+
+  authorization_url = "https://github.com/login/oauth/authorize"
+  token_url         = "https://github.com/login/oauth/access_token"
+  user_info_url     = "https://api.github.com/user"
+  default_scopes    = "user:email"
 }

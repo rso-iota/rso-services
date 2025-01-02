@@ -22,3 +22,16 @@ variable "kc_admin_password" {
   nullable    = false
   description = "The password of the Keycloak admin server. See the HELM deployment for the correct password."
 }
+
+
+variable "gh_client_id" {
+    type        = string
+    nullable    = false
+    description = "The client ID of the GitHub OAuth application."
+}
+
+variable "gh_client_secret" {
+    type       = string
+    nullable   = false
+    description = "The client secret of the GitHub OAuth application."
+}
