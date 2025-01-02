@@ -76,4 +76,9 @@ resource "keycloak_user" "users" {
   email          = "${each.value.username}@aga.rso"
   first_name     = each.value.username
   last_name      = "User"
+
+  initial_password {
+    value = each.value.password
+    temporary = false
+  }
 }
