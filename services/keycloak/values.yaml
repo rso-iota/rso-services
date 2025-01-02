@@ -1,6 +1,10 @@
 keycloak:
   namespaceOverride: keycloak
 
+  logging:
+    level: INFO
+    output: json
+
   auth:
     adminUser: RsoAdminUser123 # Set this to something else
     adminPassword: RsoAdminPassword123 # Set this to something else
