@@ -5,7 +5,7 @@ metadata:
   # No NS, so it is a cluster-wide resource
 spec:
   acme:
-    email:
+    email: !!!!  <PUT_YOUR_EMAIL_HERE> - INTENTIONAL ERROR
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-issuer-account-key

@@ -21,6 +21,7 @@ Create a k8s secret `lets-encrypt-do-dns` in the `cert-manager` namespace with t
 Update helm deps:
 
 ```shell
+helm dep up ./services/keycloak
 helm dep up ./services/cert-manager
 helm dep up ./services/traefik
 helm dep up ./services/argocd
@@ -42,8 +43,10 @@ helm install --create-namespace --namespace=traefik traefik ./services/traefik
 helm install --create-namespace --namespace=argocd argocd ./services/argocd
 helm install --create-namespace --namespace=metrics metrics ./services/metrics
 helm install --create-namespace --namespace=monitoring monitoring ./services/monitoring
+helm install --create-namespace --namespace=keycloak keycloak ./services/keycloak
 
 helm upgrade monitoring ./services/monitoring --namespace=monitoring
+helm upgrade keycloak ./services/keycloak --namespace=keycloak
 ```
 
 Wait for the `traefik` pod ta setup DO LB:

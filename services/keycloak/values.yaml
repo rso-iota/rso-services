@@ -1,0 +1,40 @@
+keycloak:
+  namespaceOverride: keycloak
+
+  auth:
+    adminUser: RsoAdminUser123 # Set this to something else
+    adminPassword: RsoAdminPassword123 # Set this to something else
+
+  production: true
+  proxyHeaders: forwarded
+  proxy: edge
+
+  resources:
+    requests:
+      cpu: 0.5
+      memory: 512Mi
+    limits:
+      cpu: 2
+      memory: 1Gi
+
+  extraEnvVars:
+    - name: KC_HOSTNAME
+      value: "https://rso-keycloak.janvasiljevic.com" # Customize this
+
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: traefik
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      cert-manager.io/cluster-issuer: letsencrypt-issuer
+    pathType: Prefix
+    path: /
+    hostname: rso-keycloak.janvasiljevic.com # Customize this
+    extraTls:
+      - secretName: keycloak-cert
+        hosts:
+          - rso-keycloak.janvasiljevic.com # Same as hostname
+
+
+
