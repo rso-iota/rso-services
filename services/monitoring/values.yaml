@@ -22,11 +22,14 @@ k8s-monitoring:
     namespaces:
       - apps
       - traefik
-      # - kong # we don't really need kong
       - keycloak
 
   clusterMetrics:
     enabled: true
+
+    node-exporter:
+      metricsTuning:
+        useIntegrationAllowList: true
 
     opencost:
       # we don't need costs really
@@ -137,6 +140,23 @@ grafana:
       serve_from_sub_path: true
       root_url: https://rso-2.janvasiljevic.com/monitoring
 
+  sidecar:
+    dashboards:
+      enabled: true
+      defaultFolderName: "General"
+      label: grafana_dashboard
+      labelValue: "1"
+      folderAnnotation: grafana_folder
+      searchNamespace: ALL
+      provider:
+        foldersFromFilesStructure: true
+    alerts:
+      enabled: true
+      searchNamespace: ALL
+      label: grafana_alert
+      labelValue: "1"
+
+
   datasources:
     datasources.yaml:
       apiVersion: 1
@@ -145,12 +165,14 @@ grafana:
           type: prometheus
           access: proxy
           orgId: 1
+          uid: promprom
           url: http://monitoring-prometheus-server:80
           isDefault: true
         - name: Loki
           type: loki
           access: proxy
           orgId: 1
+          uid: lokiloki
           url: http://loki-headless:3100
           isDefault: false
 
