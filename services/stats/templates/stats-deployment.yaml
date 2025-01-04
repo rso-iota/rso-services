@@ -6,10 +6,15 @@ metadata:
   name: stats-app-deployment
 spec:
   replicas: {{ .Values.replicaCount }}
-  serviceName: stats-svc
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: stats-app
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:
@@ -17,14 +22,13 @@ spec:
     spec:
       containers:
         - image: {{ .Values.image.name}}:{{ .Values.image.tag }}
-          ports:
-            - containerPort: {{ .Values.env.QGRAPHQL_PORT }}
-              name: graphql
           imagePullPolicy: Always
           name: stats-app
           resources:
+            limits:
+              memory: 512Mi
             requests:
-              memory: "20Mi"
+              memory: 128Mi
           env:
             - name: NATS_URL
               value: {{ .Values.env.NATS_URL }}
@@ -34,4 +38,5 @@ spec:
               value: {{ .Values.env.REDIS_URL }}
             - name: QGRAPHQL_PORT
               value: {{ .Values.env.QGRAPHQL_PORT }}
-
+          ports:
+            - containerPort: {{ .Values.env.QGRAPHQL_PORT }}

@@ -130,3 +130,25 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: kong
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: stats-app
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/write-back-method: argocd
+    argocd-image-updater.argoproj.io/image-list: stats=ghcr.io/rso-iota/rso-stats:latest
+    argocd-image-updater.argoproj.io/stats.update-strategy: digest
+spec:
+  project: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+  source:
+    repoURL: https://github.com/rso-iota/rso-services.git
+    targetRevision: HEAD
+    path: services/stats
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: apps
