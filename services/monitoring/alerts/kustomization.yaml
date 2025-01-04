@@ -1,0 +1,12 @@
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    grafana_alert: "1"
+namespace: monitoring
+
+configMapGenerator:
+  - name: alert-discord
+    files: [ ./alert.yaml ]
+
+  - name: contact-points
+    files: [ ./contacts.yaml ]

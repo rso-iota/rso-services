@@ -1,0 +1,11 @@
+apiVersion: 1
+contactPoints:
+  - orgId: 1
+    name: Discord
+    receivers:
+      - uid: ee8vfxtjyszcxc
+        type: discord
+        settings:
+          url: https://discord.com/api/webhooks/1324690028386975806/HpnJ4k3gQ6580JxLgxns5Xe3_RbAdN6JntFkL5ObOZLhNe1AY9ZxrPIzrbtcf0qILnDV
+          use_discord_username: false
+        disableResolveMessage: false

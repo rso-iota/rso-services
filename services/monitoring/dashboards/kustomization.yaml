@@ -1,0 +1,39 @@
+
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    grafana_dashboard: "1"
+namespace: monitoring
+
+# Generate a ConfigMap for each dashboard
+configMapGenerator:
+  - name: dashboards-k8s-views-global
+    options:
+      annotations:
+        grafana_folder: "K8S"
+    files: [ ./k8s-views-global.json ]
+
+  - name: dashboards-k8s-views-namespaces
+    options:
+      annotations:
+        grafana_folder: "K8S"
+    files: [ ./k8s-views-namespaces.json ]
+
+  - name: dashboards-k8s-views-nodes
+    options:
+      annotations:
+        grafana_folder: "K8S"
+    files: [ ./k8s-views-nodes.json ]
+
+  - name: dashboards-k8s-views-pods
+    options:
+      annotations:
+        grafana_folder: "K8S"
+    files: [ ./k8s-views-pods.json ]
+
+  - name: dashboards-traefik
+    options:
+      annotations:
+        grafana_folder: "Traefik"
+    files: [ ./traefik.json ]
+
