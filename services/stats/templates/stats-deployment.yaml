@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: stats-app
+  name: stats-app-deployment
+spec:
+  replicas: {{ .Values.replicaCount }}
+  serviceName: stats-svc
+  selector:
+    matchLabels:
+      app: stats-app
+  template:
+    metadata:
+      labels:
+        app: stats-app
+    spec:
+      containers:
+        - image: {{ .Values.image.name}}:{{ .Values.image.tag }}
+          ports:
+            - containerPort: {{ .Values.env.QGRAPHQL_PORT }}
+              name: graphql
+          imagePullPolicy: Always
+          name: stats-app
+          resources:
+            requests:
+              memory: "20Mi"
+          env:
+            - name: NATS_URL
+              value: {{ .Values.env.NATS_URL }}
+            - name: LOG_JSON
+              value: {{ .Values.env.LOG_JSON }}
+            - name: REDIS_URL
+              value: {{ .Values.env.REDIS_URL }}
+            - name: QGRAPHQL_PORT
+              value: {{ .Values.env.QGRAPHQL_PORT }}
+

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: stats-svc
+  namespace: apps
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: {{ .Values.env.QGRAPHQL_PORT }}
+  selector:
+    app: stats-app
+  type: ClusterIP
