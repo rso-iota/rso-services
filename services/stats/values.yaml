@@ -6,6 +6,6 @@ replicaCount: 1
 
 env:
   NATS_URL: "nats://nats.nats:4222"
-  LOG_JSON: "true"
+  LOG_JSON: True
   REDIS_URL: "stats-redis-svc:6379"
   QGRAPHQL_PORT: 8080
