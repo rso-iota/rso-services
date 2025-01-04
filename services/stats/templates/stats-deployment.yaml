@@ -31,12 +31,12 @@ spec:
               memory: 128Mi
           env:
             - name: NATS_URL
-              value: {{ .Values.env.NATS_URL }}
+              value: "{{ .Values.env.NATS_URL }}"
             - name: LOG_JSON
-              value: {{ .Values.env.LOG_JSON }}
+              value: "{{ .Values.env.LOG_JSON }}"
             - name: REDIS_URL
-              value: {{ .Values.env.REDIS_URL }}
+              value: "{{ .Values.env.REDIS_URL }}"
             - name: QGRAPHQL_PORT
-              value: {{ .Values.env.QGRAPHQL_PORT }}
+              value: "{{ .Values.env.QGRAPHQL_PORT }}"
           ports:
             - containerPort: {{ .Values.env.QGRAPHQL_PORT }}

@@ -29,19 +29,19 @@ spec:
               memory: "20Mi"
           env:
             - name: GAME_NATS_URL
-              value: {{ .Values.env.GAME_NATS_URL }}
+              value: "{{ .Values.env.GAME_NATS_URL }}"
             - name: GAME_AUTH_EP
-              value: {{ .Values.env.GAME_AUTH_EP }}
+              value: "{{ .Values.env.GAME_AUTH_EP }}"
             - name: GAME_REQUIRE_AUTH
-              value: {{ .Values.env.GAME_REQUIRE_AUTH }}
+              value: "{{ .Values.env.GAME_REQUIRE_AUTH }}"
             - name: GAME_HTTP_PORT
-              value: {{ .Values.env.GAME_HTTP_PORT }}
+              value: "{{ .Values.env.GAME_HTTP_PORT }}"
             - name: GAME_GRPC_PORT
-              value: {{ .Values.env.GAME_GRPC_PORT }}
+              value: "{{ .Values.env.GAME_GRPC_PORT }}"
             - name: GAME_NUM_TEST_GAMES
-              value: {{ .Values.env.GAME_NUM_TEST_GAMES }}
+              value: "{{ .Values.env.GAME_NUM_TEST_GAMES }}"
             - name: GAME_TEST_SERVER
-              value: {{ .Values.env.GAME_TEST_SERVER }}
+              value: "{{ .Values.env.GAME_TEST_SERVER }}"
             - name: GAME_LOG_JSON
-              value: {{ .Values.env.GAME_LOG_JSON }}
+              value: "{{ .Values.env.GAME_LOG_JSON }}"
 
