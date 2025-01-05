@@ -6,7 +6,7 @@ metadata:
 spec:
   ports:
     - protocol: TCP
-      port: grpc_port
+      port: {{ .Values.env.GRPC_PORT }}
       targetPort: grpc_port
   selector:
     app: bots-app
