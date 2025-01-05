@@ -46,4 +46,7 @@ spec:
               value: "{{ .Values.env.GAME_LOG_JSON }}"
             - name: GAME_BACKUP_REDIS_URL
               value: "{{ .Values.env.GAME_BACKUP_REDIS_URL }}"
-
+            - name: GAME_BOT_SERVICE_URL
+              value: "{{ .Values.env.GAME_BOT_SERVICE_URL }}"
+            - name: GAME_MIN_PLAYERS
+              value: "{{ .Values.env.GAME_MIN_PLAYERS }}"

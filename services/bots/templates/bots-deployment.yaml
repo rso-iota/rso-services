@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bots-app
+  name: bots-app-deployment
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: bots-app
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: bots-app
+    spec:
+      containers:
+        - image: {{ .Values.image.name}}:{{ .Values.image.tag }}
+          imagePullPolicy: Always
+          name: bots-app
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 128Mi
+          env:
+            - name: LOG_LEVEL
+              value: "{{ .Values.env.LOG_LEVEL }}"
+            - name: GAME_PORT
+              value: "{{ .Values.env.GAME_PORT }}"
+            - name: GRPC_PORT
+              value: "{{ .Values.env.GRPC_PORT }}"
