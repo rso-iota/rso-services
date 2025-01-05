@@ -7,7 +7,7 @@ spec:
   ports:
     - protocol: TCP
       port: {{ .Values.env.GRPC_PORT }}
-      targetPort: grpc_port
+      targetPort: {{ .Values.env.GRPC_PORT }}
   selector:
     app: bots-app
   type: ClusterIP

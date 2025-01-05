@@ -38,4 +38,3 @@ spec:
               value: "{{ .Values.env.GRPC_PORT }}"
           ports:
             - containerPort: {{ .Values.env.GRPC_PORT }}
-              name: grpc_port
