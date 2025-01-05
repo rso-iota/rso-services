@@ -6,8 +6,8 @@ metadata:
 spec:
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: {{ .Values.env.GRAPHQL_PORT }}
+      port: grpc_port
+      targetPort: grpc_port
   selector:
     app: bots-app
   type: ClusterIP

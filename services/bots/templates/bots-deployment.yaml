@@ -36,3 +36,6 @@ spec:
               value: "{{ .Values.env.GAME_PORT }}"
             - name: GRPC_PORT
               value: "{{ .Values.env.GRPC_PORT }}"
+          ports:
+            - containerPort: {{ .Values.env.GRPC_PORT }}
+              name: grpc_port
