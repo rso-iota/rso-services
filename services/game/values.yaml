@@ -14,5 +14,6 @@ env:
   GAME_NUM_TEST_GAMES: 4
   GAME_TEST_SERVER: True
   GAME_LOG_JSON: True
+  GAME_BACKUP_REDIS_URL: "game-backup-redis-svc:6379"
 
 dns: rso-2.janvasiljevic.com

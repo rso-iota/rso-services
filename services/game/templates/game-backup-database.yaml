@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: game-backup-redis-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/data
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: game-backup-redis-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: game-backup-redis-deployment
+spec:
+  selector:
+    matchLabels:
+      app: game-backup-redis
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: game-backup-redis
+    spec:
+      containers:
+        - name: game-backup-redis-container
+          image: redis:latest
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - mountPath: /data
+              name: redis-storage
+      volumes:
+        - name: redis-storage
+          persistentVolumeClaim:
+            claimName: game-backup-redis-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: game-backup-redis-svc
+spec:
+  selector:
+    app: game-backup-redis
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
