@@ -44,4 +44,6 @@ spec:
               value: "{{ .Values.env.GAME_TEST_SERVER }}"
             - name: GAME_LOG_JSON
               value: "{{ .Values.env.GAME_LOG_JSON }}"
+            - name: GAME_BACKUP_REDIS_URL
+              value: "{{ .Values.env.GAME_BACKUP_REDIS_URL }}"
 
