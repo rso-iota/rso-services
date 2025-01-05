@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: stats-ingress
+  namespace: apps
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+    - host: {{ .Values.dns }}
+      http:
+        paths:
+          - path: {{ .Values.contextPath }}
+            pathType: Prefix
+            backend:
+              service:
+                name: stats-svc
+                port:
+                  number: 80
