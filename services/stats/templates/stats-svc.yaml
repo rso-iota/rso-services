@@ -7,7 +7,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: {{ .Values.env.QGRAPHQL_PORT }}
+      targetPort: {{ .Values.env.GRAPHQL_PORT }}
   selector:
     app: stats-app
   type: ClusterIP
