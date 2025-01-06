@@ -22,6 +22,8 @@ spec:
               name: httpws
             - containerPort:  {{ .Values.env.GRPC_PORT }}
               name: grpc
+            - containerPort: {{ .Values.env.INTERNAL_HTTP_PORT }}
+              name: internal-http
           imagePullPolicy: Always
           name: game-app
           resources:
