@@ -50,5 +50,5 @@ spec:
               value: "{{ .Values.env.BOT_SERVICE_URL }}"
             - name: MIN_PLAYERS
               value: "{{ .Values.env.MIN_PLAYERS }}"
-            - name: CREATE_GAME_HTTP_PORT
-              value: "{{ .Values.env.CREATE_GAME_HTTP_PORT }}"
+            - name: INTERNAL_HTTP_PORT
+              value: "{{ .Values.env.INTERNAL_HTTP_PORT }}"

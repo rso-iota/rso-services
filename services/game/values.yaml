@@ -17,6 +17,6 @@ env:
   TEST_SERVER: True
   LOG_JSON: True
   BACKUP_REDIS_URL: "game-backup-redis-svc:6379"
-  CREATE_GAME_HTTP_PORT: 8082
+  INTERNAL_HTTP_PORT: 8082
 
 dns: rso-2.janvasiljevic.com
