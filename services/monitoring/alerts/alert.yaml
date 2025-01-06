@@ -62,4 +62,4 @@ groups:
           summary: Alerts if at least one error is present
         isPaused: false
         notification_settings:
-          receiver: grafana-default-email
+          receiver: Discord

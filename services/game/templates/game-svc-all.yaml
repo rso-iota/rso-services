@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: game-app
+  name: game-svc-all-grpc
+  namespace: {{ .Release.Namespace }}
+spec:
+  ports:
+    - protocol: TCP
+      name: grpc-port
+      targetPort: 8081
+      port: 8081
+  selector:
+    app: game-app
+  type: ClusterIP

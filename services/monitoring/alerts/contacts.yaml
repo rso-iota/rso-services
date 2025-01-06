@@ -6,6 +6,7 @@ contactPoints:
       - uid: ee8vfxtjyszcxc
         type: discord
         settings:
+          avatar_url: https://i.pinimg.com/736x/2e/33/61/2e336135df66cf5a78b1c13d74709425.jpg
           url: https://discord.com/api/webhooks/1324690028386975806/HpnJ4k3gQ6580JxLgxns5Xe3_RbAdN6JntFkL5ObOZLhNe1AY9ZxrPIzrbtcf0qILnDV
           use_discord_username: false
         disableResolveMessage: false
