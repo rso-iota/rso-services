@@ -18,10 +18,10 @@ spec:
       containers:
         - image: {{ .Values.image.name}}:{{ .Values.image.tag }}
           ports:
-            - containerPort: {{ .Values.env.HTTP_PORT }}
-              name: httpws
-            - containerPort:  {{ .Values.env.GRPC_PORT }}
-              name: grpc
+            - containerPort: {{ .Values.env.EXTERNAL_HTTP_PORT }}
+              name: ext-http
+            - containerPort:  {{ .Values.env.INTERNAL_HTTP_PORT }}
+              name: int-http
           imagePullPolicy: Always
           name: game-app
           resources:
@@ -34,10 +34,8 @@ spec:
               value: "{{ .Values.env.AUTH_EP }}"
             - name: REQUIRE_AUTH
               value: "{{ .Values.env.REQUIRE_AUTH }}"
-            - name: HTTP_PORT
-              value: "{{ .Values.env.HTTP_PORT }}"
-            - name: GRPC_PORT
-              value: "{{ .Values.env.GRPC_PORT }}"
+            - name: EXTERNAL_HTTP_PORT
+              value: "{{ .Values.env.EXTERNAL_HTTP_PORT }}"
             - name: NUM_TEST_GAMES
               value: "{{ .Values.env.NUM_TEST_GAMES }}"
             - name: TEST_SERVER
