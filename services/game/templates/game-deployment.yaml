@@ -21,7 +21,12 @@ spec:
             - containerPort: {{ .Values.env.EXTERNAL_HTTP_PORT }}
               name: ext-http
             - containerPort:  {{ .Values.env.INTERNAL_HTTP_PORT }}
-              name: int-http
+              name: int-httpc
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
           imagePullPolicy: Always
           name: game-app
           resources:
