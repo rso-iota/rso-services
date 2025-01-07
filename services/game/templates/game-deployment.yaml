@@ -16,7 +16,7 @@ spec:
         app: game-app
     spec:
       containers:
-        - image: ghcr.io/rso-iota/rso-game@sha256:65af4391e814de8af9d2a60a26061b3f75c06cbb8f27f82c510d972fbbaacd08
+        - image: {{ .Values.image.name}}:{{ .Values.image.tag }}
           ports:
             - containerPort: {{ .Values.env.EXTERNAL_HTTP_PORT }}
               name: ext-http
@@ -57,3 +57,5 @@ spec:
               value: "{{ .Values.env.INTERNAL_HTTP_PORT }}"
             - name: TERMINATE_MINUTES
               value: "{{ .Values.env.TERMINATE_MINUTES }}"
+            - name: LOBBY_SERVICE_URL
+              value: "{{ .Values.env.LOBBY_SERVICE_URL }}"
