@@ -8,6 +8,9 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: {{ .Values.lobby.internalPort }}
+    - protocol: TCP
+      port: {{ .Values.config.grpcPort }}
+      targetPort: {{ .Values.config.grpcPort }}
   selector:
     app: lobby-app
   type: ClusterIP
