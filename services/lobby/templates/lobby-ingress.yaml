@@ -17,4 +17,4 @@ spec:
               service:
                 name: lobby-svc
                 port:
-                  name: http
+                  name: external-http

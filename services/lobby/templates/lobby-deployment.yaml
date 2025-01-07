@@ -50,7 +50,9 @@ spec:
               {{- end }}
           ports:
             - containerPort: {{ .Values.lobby.internalPort }}
+              name: external-http
             - containerPort: {{ .Values.config.grpcPort }}
+              name: internal-grpc
           livenessProbe:
             httpGet:
               path: {{.Values.config.contextPath }}/actuator/health/liveness
