@@ -55,3 +55,5 @@ spec:
               value: "{{ .Values.env.MIN_PLAYERS }}"
             - name: INTERNAL_HTTP_PORT
               value: "{{ .Values.env.INTERNAL_HTTP_PORT }}"
+            - name: TERMINATE_MINUTES
+              value: "{{ .Values.env.TERMINATE_MINUTES }}"

@@ -17,5 +17,6 @@ env:
   BACKUP_REDIS_URL: "game-backup-redis-svc:6379"
   EXTERNAL_HTTP_PORT: 8080
   INTERNAL_HTTP_PORT: 8081
+  TERMINATE_MINUTES: 5
 
 dns: rso-2.janvasiljevic.com
