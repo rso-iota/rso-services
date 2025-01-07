@@ -6,8 +6,13 @@ metadata:
 spec:
   ports:
     - protocol: TCP
+      name: external-http
       port: 80
       targetPort: {{ .Values.lobby.internalPort }}
+    - protocol: TCP
+      name: grpc-internal
+      port: {{ .Values.config.grpcPort }}
+      targetPort: {{ .Values.config.grpcPort }}
   selector:
     app: lobby-app
   type: ClusterIP

@@ -15,5 +15,11 @@ image:
 
 config:
   contextPath: "/api/lobby"
+  grpcPort: 9090
+
+env:
+  GAME_APP_ADMIN_URL: "http://game-svc-all-admin.apps:8081"
+  GAME_APP_GRPC_SVC_TEMPLATE: "http://game-svc-{SERVER_ID}.apps:8081"
+
 
 dns: rso-2.janvasiljevic.com

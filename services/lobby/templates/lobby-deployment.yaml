@@ -44,8 +44,15 @@ spec:
               value: {{ .Values.db.password }}
             - name: LOGGING_STRUCTURED_FORMAT_CONSOLE
               value: ecs
+              {{- range $key, $value := .Values.env }}
+            - name: SVC_{{ $key | upper }}
+              value: {{ $value | quote }}
+              {{- end }}
           ports:
             - containerPort: {{ .Values.lobby.internalPort }}
+              name: external-http
+            - containerPort: {{ .Values.config.grpcPort }}
+              name: internal-grpc
           livenessProbe:
             httpGet:
               path: {{.Values.config.contextPath }}/actuator/health/liveness
