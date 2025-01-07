@@ -17,4 +17,5 @@ spec:
               service:
                 name: lobby-svc
                 port:
+                  name: http
                   number: 80
