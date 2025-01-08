@@ -21,7 +21,12 @@ spec:
             - containerPort: {{ .Values.env.EXTERNAL_HTTP_PORT }}
               name: ext-http
             - containerPort:  {{ .Values.env.INTERNAL_HTTP_PORT }}
-              name: int-http
+              name: int-httpc
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
           imagePullPolicy: Always
           name: game-app
           resources:
@@ -50,3 +55,7 @@ spec:
               value: "{{ .Values.env.MIN_PLAYERS }}"
             - name: INTERNAL_HTTP_PORT
               value: "{{ .Values.env.INTERNAL_HTTP_PORT }}"
+            - name: TERMINATE_MINUTES
+              value: "{{ .Values.env.TERMINATE_MINUTES }}"
+            - name: LOBBY_SERVICE_URL
+              value: "{{ .Values.env.LOBBY_SERVICE_URL }}"
