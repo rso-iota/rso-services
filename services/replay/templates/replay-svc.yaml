@@ -6,6 +6,7 @@ metadata:
 spec:
   ports:
     - protocol: TCP
+      name: http-port
       port: 80
       targetPort: {{ .Values.env.UVICORN_PORT }}
   selector:
