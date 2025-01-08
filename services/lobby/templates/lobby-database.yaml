@@ -24,16 +24,14 @@ spec:
 
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: lobby-postgres-deployment
+  name: lobby-postgres-statefulset
 spec:
   selector:
     matchLabels:
       app: lobby-postgres
   replicas: 1
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:

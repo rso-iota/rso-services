@@ -24,16 +24,14 @@ spec:
 
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: replay-mongodb-deployment
+  name: replay-mongodb-statefulset
 spec:
   selector:
     matchLabels:
       app: replay-mongodb
   replicas: 1
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
