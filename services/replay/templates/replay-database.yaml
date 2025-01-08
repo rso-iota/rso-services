@@ -65,5 +65,5 @@ spec:
     app: replay-mongodb
   ports:
     - protocol: TCP
-      port: 5432
-      targetPort: 5432
+      port: 27017
+      targetPort: 27017
