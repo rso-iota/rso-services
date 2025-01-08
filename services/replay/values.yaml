@@ -17,3 +17,5 @@ env:
 
   REPLAY_LOG_LEVEL: "INFO"
   
+dns: rso-2.janvasiljevic.com
+contextPath: "/api/v1/replays"
