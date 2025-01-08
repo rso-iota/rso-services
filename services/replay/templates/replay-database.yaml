@@ -32,8 +32,6 @@ spec:
     matchLabels:
       app: replay-mongodb
   replicas: 1
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:

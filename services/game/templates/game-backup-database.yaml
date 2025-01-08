@@ -32,8 +32,6 @@ spec:
     matchLabels:
       app: game-backup-redis
   replicas: 1
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
