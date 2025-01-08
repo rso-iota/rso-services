@@ -24,9 +24,9 @@ spec:
 
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: replay-mongodb-deployment
+  name: replay-mongodb-statefulset
 spec:
   selector:
     matchLabels:

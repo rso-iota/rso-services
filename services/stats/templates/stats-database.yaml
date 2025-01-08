@@ -24,9 +24,9 @@ spec:
 
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: stats-redis-deployment
+  name: stats-redis--statefulset
 spec:
   selector:
     matchLabels:
