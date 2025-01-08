@@ -1,0 +1,19 @@
+image:
+  name: "ghcr.io/rso-iota/rso-replay"
+  tag: "latest"
+
+replay:
+  replicaCount: 1
+
+env:
+  REPLAY_PORT: "8080"
+  REPLAY_MONGO_URL: "mongodb://replay-mongodb-svc:27017"
+  REPLAY_NATS_URL: "nats://nats.nats:4222"
+  REPLAY_GAME_WIDTH: "800"
+  REPLAY_GAME_HEIGHT: "600"
+
+  REPLAY_BACKGROUND_COLOR: "white"
+  REPLAY_FOOD_COLOR: "black"
+
+  REPLAY_LOG_LEVEL: "INFO"
+  

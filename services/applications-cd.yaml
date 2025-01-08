@@ -174,3 +174,25 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: apps
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: replay-app
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/write-back-method: argocd
+    argocd-image-updater.argoproj.io/image-list: replay=ghcr.io/rso-iota/rso-replay:latest
+    argocd-image-updater.argoproj.io/replay.update-strategy: digest
+spec:
+  project: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+  source:
+    repoURL: https://github.com/rso-iota/rso-services.git
+    targetRevision: HEAD
+    path: services/replay
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: apps

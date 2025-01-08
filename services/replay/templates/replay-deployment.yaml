@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: replay-app
+spec:
+  replicas: {{ .Values.replay.replicaCount }}
+  selector:
+    matchLabels:
+      app: replay-app
+  template:
+    metadata:
+      labels:
+        app: replay-app
+    spec:
+      containers:
+      - name: replay-app
+        image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        imagePullPolicy: Always
+
+        env:
+        {{- range $key, $val := .Values.env }}
+        - name: {{ $key }}
+          value: {{ $val | quote }}
+        {{- end }}
+        ports:
+        - containerPort: {{ .Values.env.REPLAY_PORT }}

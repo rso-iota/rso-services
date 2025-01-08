@@ -1,0 +1,4 @@
+apiVersion: v2
+name: rso-replay
+description: Replay service for RSO game
+version: "1.0.0"
