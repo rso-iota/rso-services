@@ -33,29 +33,7 @@ spec:
             requests:
               memory: "20Mi"
           env:
-            - name: NATS_URL
-              value: "{{ .Values.env.NATS_URL }}"
-            - name: AUTH_EP
-              value: "{{ .Values.env.AUTH_EP }}"
-            - name: REQUIRE_AUTH
-              value: "{{ .Values.env.REQUIRE_AUTH }}"
-            - name: EXTERNAL_HTTP_PORT
-              value: "{{ .Values.env.EXTERNAL_HTTP_PORT }}"
-            - name: NUM_TEST_GAMES
-              value: "{{ .Values.env.NUM_TEST_GAMES }}"
-            - name: TEST_SERVER
-              value: "{{ .Values.env.TEST_SERVER }}"
-            - name: LOG_JSON
-              value: "{{ .Values.env.LOG_JSON }}"
-            - name: BACKUP_REDIS_URL
-              value: "{{ .Values.env.BACKUP_REDIS_URL }}"
-            - name: BOT_SERVICE_URL
-              value: "{{ .Values.env.BOT_SERVICE_URL }}"
-            - name: MIN_PLAYERS
-              value: "{{ .Values.env.MIN_PLAYERS }}"
-            - name: INTERNAL_HTTP_PORT
-              value: "{{ .Values.env.INTERNAL_HTTP_PORT }}"
-            - name: TERMINATE_MINUTES
-              value: "{{ .Values.env.TERMINATE_MINUTES }}"
-            - name: LOBBY_SERVICE_URL
-              value: "{{ .Values.env.LOBBY_SERVICE_URL }}"
+          {{- range $key, $val := .Values.env }}
+          - name: {{ $key }}
+            value: {{ $val | quote }}
+          {{- end }}
