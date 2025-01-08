@@ -6,7 +6,7 @@ replay:
   replicaCount: 1
 
 env:
-  REPLAY_PORT: "8080"
+  UVICORN_PORT: "8080"
   REPLAY_MONGO_URL: "mongodb://replay-mongodb-svc:27017"
   REPLAY_NATS_URL: "nats://nats.nats:4222"
   REPLAY_GAME_WIDTH: "800"

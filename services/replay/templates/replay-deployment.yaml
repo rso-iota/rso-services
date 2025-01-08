@@ -23,4 +23,4 @@ spec:
           value: {{ $val | quote }}
         {{- end }}
         ports:
-        - containerPort: {{ .Values.env.REPLAY_PORT }}
+        - containerPort: {{ .Values.env.UVICORN_PORT }}
