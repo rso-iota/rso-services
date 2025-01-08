@@ -45,16 +45,15 @@ spec:
           ports:
             - containerPort: 27017
           env:
-              # set the path to the mongodb data directory
             - name: MONGO_INITDB_DATA_PATH
               value: /data/db
-            volumeMounts:
+          volumeMounts:
             - mountPath: /data/db
               name: mongodb-storage
-          volumes:
-          - name: mongodb-storage
-            persistentVolumeClaim:
-            claimName: replay-mongodb-pvc
+      volumes:
+      - name: mongodb-storage
+        persistentVolumeClaim:
+        claimName: replay-mongodb-pvc
 
 ---
 apiVersion: v1
