@@ -24,9 +24,9 @@ spec:
 
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: game-backup-redis-deployment
+  name: game-backup-redis-statefulset
 spec:
   selector:
     matchLabels:
