@@ -6,7 +6,7 @@ metadata:
 spec:
   ports:
     - protocol: TCP
-      port: {{ .Values.env.UVICORN_PORT }}
+      port: 80
       targetPort: {{ .Values.env.UVICORN_PORT }}
   selector:
     app: replay-app
