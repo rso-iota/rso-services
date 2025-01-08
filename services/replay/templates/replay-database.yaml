@@ -53,7 +53,7 @@ spec:
       volumes:
       - name: mongodb-storage
         persistentVolumeClaim:
-        claimName: replay-mongodb-pvc
+          claimName: replay-mongodb-pvc
 
 ---
 apiVersion: v1
