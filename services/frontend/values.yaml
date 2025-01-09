@@ -9,3 +9,4 @@ env:
   backendApi: "http://rso-lobby:8080/backend"
   keycloakAuthority: "https://rso-keycloak.janvasiljevic.com/realms/aga.rso"
   keycloakClientId: "fe-client"
+  discordWebhook: "Secret"

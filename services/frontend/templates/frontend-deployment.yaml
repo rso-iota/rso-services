@@ -23,6 +23,8 @@ spec:
               value: {{ .Values.env.keycloakAuthority }}
             - name: VITE_KC_CLIENT_ID
               value: {{ .Values.env.keycloakClientId }}
+            - name: VITE_DISCORD_WEBHOOK
+              value: {{ .Values.env.discordWebhook }}
           image: {{ .Values.image.name }}:{{ .Values.image.tag }}
           ports:
             - containerPort: {{ .Values.appPort }}

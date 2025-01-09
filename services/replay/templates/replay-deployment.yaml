@@ -16,7 +16,6 @@ spec:
       - name: replay-app
         image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
         imagePullPolicy: Always
-
         env:
         {{- range $key, $val := .Values.env }}
         - name: {{ $key }}
@@ -24,3 +23,25 @@ spec:
         {{- end }}
         ports:
         - containerPort: {{ .Values.env.UVICORN_PORT }}
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: {{ .Values.env.UVICORN_PORT }}
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: {{ .Values.env.UVICORN_PORT }}
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        volumeMounts:
+        - name: frames-storage
+          mountPath: /tmp/frames
+      volumes:
+      - name: frames-storage
+        emptyDir: {}
