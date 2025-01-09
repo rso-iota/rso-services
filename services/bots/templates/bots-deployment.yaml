@@ -38,3 +38,20 @@ spec:
               value: "{{ .Values.env.GRPC_PORT }}"
           ports:
             - containerPort: {{ .Values.env.GRPC_PORT }}
+            - containerPort: 8080  # Health check port
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
