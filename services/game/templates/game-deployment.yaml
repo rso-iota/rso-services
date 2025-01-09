@@ -22,11 +22,13 @@ spec:
               name: ext-http
             - containerPort:  {{ .Values.env.INTERNAL_HTTP_PORT }}
               name: int-httpc
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+          # Readiness probe same as liveness - game service doesn't really need external services to function
           readinessProbe:
             tcpSocket:
               port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 10
           imagePullPolicy: Always
           name: game-app
           resources:

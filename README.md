@@ -70,3 +70,11 @@ dig @ns1.digitalocean.com +noall +answer +domain=<YOUR_DOMAIN> rso rso-keycloak 
 ```
 
 Don't forget to set NS in external domain provider to DO NS if you aren't using DO DNS
+
+### Applying the manifests
+
+```shell
+k apply -f ./services/applications-cd.yaml
+```
+
+ArgoCD will sync the applications and deploy them to the cluster.
