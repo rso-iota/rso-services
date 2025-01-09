@@ -25,14 +25,10 @@ spec:
           livenessProbe:
             tcpSocket:
               port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 30
           # Readiness probe same as liveness - game service doesn't really need external services to function
           readinessProbe:
             tcpSocket:
               port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 30
           imagePullPolicy: Always
           name: game-app
           resources:
