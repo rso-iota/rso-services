@@ -71,7 +71,7 @@ dig @ns1.digitalocean.com +noall +answer +domain=<YOUR_DOMAIN> rso rso-keycloak 
 
 Don't forget to set NS in external domain provider to DO NS if you aren't using DO DNS
 
-For actual apps tow work you need to ron the following:
+For actual apps to work you need to ron the following:
 
 ```shell
 cd services && k apply -f applcations-cd.yaml

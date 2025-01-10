@@ -16,6 +16,8 @@ env:
   REPLAY_FOOD_COLOR: "black"
 
   REPLAY_LOG_LEVEL: "INFO"
+  REPLAY_USE_PLAYER_SKINS: "false"
+
   
 dns: rso-2.janvasiljevic.com
 contextPath: "/api/v1/replays"
